@@ -1,0 +1,8 @@
+# the_derek
+# Project exclude paths
+
+/out/
+/src/dataFiles/
+/src/pokemans/utilities/read/
+/src/pokemans/utilities/write/
+/.idea/
