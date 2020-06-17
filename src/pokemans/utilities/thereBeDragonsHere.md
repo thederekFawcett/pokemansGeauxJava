@@ -8,4 +8,4 @@
  ************************************************/
 
 
-read & write utility files go here to auto-generate core classes
+read & write utility files go here to auto-generate core classes from game master
