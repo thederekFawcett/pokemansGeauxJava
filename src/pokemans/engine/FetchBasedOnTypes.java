@@ -1,6 +1,6 @@
-/************************************************
+/*
  * Copyright (c) 2020, Derek Fawcett. All rights reserved. No usage without permission.
- ************************************************/
+ */
 
 package pokemans.engine;
 
@@ -131,5 +131,9 @@ public class FetchBasedOnTypes {
 
     public static void sendToFetchBasedOnStats() {
         FetchBasedOnStats.againstTypes(typesSuperEffective, damageSuperEffective);
+    }
+
+    static public String listToString(ArrayList<Type> type) {
+        return type.toString().replace("[", "").replace("]", "");
     }
 }

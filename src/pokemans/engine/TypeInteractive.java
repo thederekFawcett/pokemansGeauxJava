@@ -1,6 +1,6 @@
-/************************************************
+/*
  * Copyright (c) 2020, Derek Fawcett. All rights reserved. No usage without permission.
- ************************************************/
+ */
 
 package pokemans.engine;
 
@@ -13,41 +13,62 @@ public class TypeInteractive {
 
     public static void main(String[] args) {
         String wantContinue;
-        do {
-            askForFirstType();
-            askForSecondType();
+        //do {
+        askForFirstType();
 
-            // calculates type effectivenesses. adds them to list
-            FetchBasedOnTypes.againstTypes(FetchBasedOnTypes.userTypes);
 
-            System.out.print("\nWhat would you like to see?:\nSuper-Effective types? (t) or Pokemon? (p): ");
-            in = new Scanner(System.in);
-            String userInput = in.nextLine().toUpperCase();
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
 
-            boolean quitLoop = false;
-            do {
-                switch (userInput) {
-                    case "X" -> System.exit(0);
-                    case "T" -> {
-                        displayUsefulTypes();
-                        quitLoop = true;
-                    }
-                    case "P" -> {
-                        displayUsefulPokes();
-                        quitLoop = true;
-                    }
-                    default -> {
-                        System.out.print("Not a valid entry, please try again: ");
-                        userInput = in.nextLine().toUpperCase();
-                        quitLoop = false;
-                    }
-                }
-            } while (!quitLoop);
+        askForSecondType();
 
-            System.out.print("\nWould you like to try again? y/n: ");
-            wantContinue = in.nextLine().toUpperCase();
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
 
-        } while (wantContinue.equals("Y"));
+
+        // calculates type effectivenesses. adds them to list
+        FetchBasedOnTypes.againstTypes(FetchBasedOnTypes.userTypes);
+
+        System.out.print("\nWhat would you like to see?:\nSuper-Effective types? (t) or Pokemon? (p): ");
+
+
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+
+        //in = new Scanner(System.in);
+        //String userInput = in.nextLine().toUpperCase();
+
+
+        String userInput = "P";
+
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+
+
+        boolean quitLoop = false;
+        //do {
+        switch (userInput) {
+            case "X" -> System.exit(0);
+            case "T" -> {
+                displayUsefulTypes();
+                quitLoop = true;
+            }
+            case "P" -> {
+                displayUsefulPokes();
+                quitLoop = true;
+            }
+            default -> {
+                System.out.print("Not a valid entry, please try again: ");
+                userInput = in.nextLine().toUpperCase();
+                quitLoop = false;
+            }
+        }
+        // } while (!quitLoop);
+
+        //      System.out.print("\nWould you like to try again? y/n: ");
+        //      wantContinue = in.nextLine().toUpperCase();
+
+        //  } while (wantContinue.equals("Y"));
     }
 
     private static void askForFirstType() {
@@ -55,7 +76,17 @@ public class TypeInteractive {
 
         // collect user input
         System.out.print("\n\nPlease enter a type (x to exit): ");
-        String userInput = collectUserInputTypeAsString(in);
+
+
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+
+        String userInput = "POKEMON_TYPE_ROCK";
+        //String userInput = collectUserInputTypeAsString(in);
+
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+
 
         // convert userInput to Type
         Type userType = Type.stringToType(userInput);
@@ -74,7 +105,13 @@ public class TypeInteractive {
     public static void askForSecondType() {
         // collect user input
         System.out.print("\nSecond type: (n if none, x to exit): ");
-        String userInput = collectUserInputTypeAsString(in);
+
+
+        /////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
+
+        String userInput = "POKEMON_TYPE_NORMAL";
+        //String userInput = collectUserInputTypeAsString(in);
 
         boolean quitLoop = false;
         do {
@@ -104,8 +141,8 @@ public class TypeInteractive {
 
     private static void displayUsefulTypes() {
 
-        System.out.println("\nType to use against " + FetchBasedOnTypes.userTypes.toString().replace
-                ("[", "").replace("]", "") + ":");
+        System.out.println("\n\nType to use against " +
+                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + ":");
 
         // print results
         System.out.println("\nSuper Effective Damage Against: ");
@@ -121,12 +158,9 @@ public class TypeInteractive {
     }
 
     private static void displayUsefulPokes() {
-        System.out.println("\nUseful pokes to use against " + FetchBasedOnTypes.userTypes.toString().replace
-                ("[", "").replace("]", "") + ":");
-
+        System.out.println("\n\nTop 20 pokes to use against " +
+                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n");
         FetchBasedOnTypes.sendToFetchBasedOnStats();
-        //FetchBasedOnStats.againstTypes((FetchBasedOnTypes.userTypes));
-
     }
 
     public static String collectUserInputTypeAsString(Scanner in) {
