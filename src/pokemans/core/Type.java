@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2020, Derek Fawcett. All rights reserved.No usage without permission.
-*/
+ * Copyright (c) 2020, Derek Fawcett. All rights reserved. No usage without permission.
+ */
 
  // **This file is auto-generated** 
 
@@ -9,95 +9,95 @@ package pokemans.core;
 import java.math.BigDecimal;
 
 public enum Type {
-	// Is "this much" effective against: 
-	// 0 = Normal	1 = Fighting	2 = Flying	3 = Poison	4 = Ground
-	// 5 = Rock	 6 = Bug	7 = Ghost	 8 = Steel	9 = Fire
-	// 10 = Water	11 = Grass	12 = Electric	13 = Psychic	14 = Ice
-	//15 = Dragon	16 = Dark	17 = Fairy
+    // Is "this much" effective against:
+    // 0 = Normal	1 = Fighting	2 = Flying	3 = Poison	4 = Ground
+    // 5 = Rock	 6 = Bug	7 = Ghost	 8 = Steel	9 = Fire
+    // 10 = Water	11 = Grass	12 = Electric	13 = Psychic	14 = Ice
+    //15 = Dragon	16 = Dark	17 = Fairy
 
-	//								0      1      2      3    4
-	POKEMON_TYPE_BUG("POKEMON_TYPE_BUG", BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625)),
-	POKEMON_TYPE_DARK("POKEMON_TYPE_DARK", BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625)),
-	POKEMON_TYPE_DRAGON("POKEMON_TYPE_DRAGON", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.390625)),
-	POKEMON_TYPE_ELECTRIC("POKEMON_TYPE_ELECTRIC", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.390625),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_FAIRY("POKEMON_TYPE_FAIRY", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_FIGHTING("POKEMON_TYPE_FIGHTING", BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.390625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625)),
-	POKEMON_TYPE_FIRE("POKEMON_TYPE_FIRE", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_FLYING("POKEMON_TYPE_FLYING", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_GHOST("POKEMON_TYPE_GHOST", BigDecimal.valueOf(0.390625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_GRASS("POKEMON_TYPE_GRASS", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_GROUND("POKEMON_TYPE_GROUND", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.390625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_ICE("POKEMON_TYPE_ICE", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_NORMAL("POKEMON_TYPE_NORMAL", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.390625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_POISON("POKEMON_TYPE_POISON", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.390625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6)),
-	POKEMON_TYPE_PSYCHIC("POKEMON_TYPE_PSYCHIC", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.390625), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_ROCK("POKEMON_TYPE_ROCK", BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0)),
-	POKEMON_TYPE_STEEL("POKEMON_TYPE_STEEL", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6)),
-	POKEMON_TYPE_WATER("POKEMON_TYPE_WATER", BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(1.6), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.6),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0),
-								  BigDecimal.valueOf(0.625), BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));
+    //								0      1      2      3    4
+    POKEMON_TYPE_BUG("POKEMON_TYPE_BUG", new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("0.625")),
+    POKEMON_TYPE_DARK("POKEMON_TYPE_DARK", new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625")),
+    POKEMON_TYPE_DRAGON("POKEMON_TYPE_DRAGON", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.390625")),
+    POKEMON_TYPE_ELECTRIC("POKEMON_TYPE_ELECTRIC", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.390625"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_FAIRY("POKEMON_TYPE_FAIRY", new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("1.6"), new BigDecimal("1.0")),
+    POKEMON_TYPE_FIGHTING("POKEMON_TYPE_FIGHTING", new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("0.390625"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("0.625")),
+    POKEMON_TYPE_FIRE("POKEMON_TYPE_FIRE", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("0.625"),
+            new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_FLYING("POKEMON_TYPE_FLYING", new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_GHOST("POKEMON_TYPE_GHOST", new BigDecimal("0.390625"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0")),
+    POKEMON_TYPE_GRASS("POKEMON_TYPE_GRASS", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.6"),
+            new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_GROUND("POKEMON_TYPE_GROUND", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.390625"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_ICE("POKEMON_TYPE_ICE", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"),
+            new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_NORMAL("POKEMON_TYPE_NORMAL", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("0.390625"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_POISON("POKEMON_TYPE_POISON", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.390625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6")),
+    POKEMON_TYPE_PSYCHIC("POKEMON_TYPE_PSYCHIC", new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"),
+            new BigDecimal("1.0"), new BigDecimal("0.390625"), new BigDecimal("1.0")),
+    POKEMON_TYPE_ROCK("POKEMON_TYPE_ROCK", new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.625"),
+            new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0")),
+    POKEMON_TYPE_STEEL("POKEMON_TYPE_STEEL", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6")),
+    POKEMON_TYPE_WATER("POKEMON_TYPE_WATER", new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"),
+            new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
+            new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"));
 
-	private final BigDecimal NORMAL, FIGHTING, FLYING, POISON, GROUND, ROCK, BUG, GHOST, STEEL, FIRE,
-			WATER, GRASS, ELECTRIC, PSYCHIC, ICE, DRAGON, DARK, FAIRY;
-	private final String TYPENAME;
+    private final BigDecimal NORMAL, FIGHTING, FLYING, POISON, GROUND, ROCK, BUG, GHOST, STEEL, FIRE,
+            WATER, GRASS, ELECTRIC, PSYCHIC, ICE, DRAGON, DARK, FAIRY;
+    private final String TYPENAME;
 
-	Type(String TYPENAME, BigDecimal NORMAL, BigDecimal FIGHTING, BigDecimal FLYING, BigDecimal POISON,
-		 BigDecimal GROUND, BigDecimal ROCK, BigDecimal BUG, BigDecimal GHOST, BigDecimal STEEL, BigDecimal FIRE,
-		 BigDecimal WATER, BigDecimal GRASS, BigDecimal ELECTRIC, BigDecimal PSYCHIC, BigDecimal ICE,
-		 BigDecimal DRAGON, BigDecimal DARK, BigDecimal FAIRY) {
-		this.TYPENAME = TYPENAME;
+    Type(String TYPENAME, BigDecimal NORMAL, BigDecimal FIGHTING, BigDecimal FLYING, BigDecimal POISON,
+         BigDecimal GROUND, BigDecimal ROCK, BigDecimal BUG, BigDecimal GHOST, BigDecimal STEEL, BigDecimal FIRE,
+         BigDecimal WATER, BigDecimal GRASS, BigDecimal ELECTRIC, BigDecimal PSYCHIC, BigDecimal ICE,
+         BigDecimal DRAGON, BigDecimal DARK, BigDecimal FAIRY) {
+        this.TYPENAME = TYPENAME;
 		this.NORMAL = NORMAL;
 		this.FIGHTING = FIGHTING;
 		this.FLYING = FLYING;

@@ -21,7 +21,7 @@ public class FetchBasedOnTypes {
     static final ArrayList<BigDecimal> damageNotEffective = new ArrayList<>();
 
     static void againstTypes(ArrayList<Type> userTypes) {
-        BigDecimal againstThis = BigDecimal.valueOf(0.0), one = BigDecimal.valueOf(1);
+        BigDecimal againstThis = new BigDecimal("0.0"), one = new BigDecimal("1");
         typesSuperEffective.clear();
         typesNotEffective.clear();
         damageSuperEffective.clear();
@@ -100,7 +100,7 @@ public class FetchBasedOnTypes {
             if (biggerListType.contains(smallerListType.get(smallCount))) {
                 // remove from damage lists first, because index is from type lists
                 bigCount = biggerListType.indexOf(smallerListType.get(smallCount));
-                if (smallerListDamage.get(smallCount).multiply(biggerListDamage.get(bigCount)).compareTo(BigDecimal.valueOf(1)) == 0) {
+                if (smallerListDamage.get(smallCount).multiply(biggerListDamage.get(bigCount)).compareTo(new BigDecimal("1")) == 0) {
                     biggerListDamage.remove(biggerListType.indexOf(smallerListType.get(smallCount)));
                     biggerListType.remove(smallerListType.get(smallCount));
                 } else {

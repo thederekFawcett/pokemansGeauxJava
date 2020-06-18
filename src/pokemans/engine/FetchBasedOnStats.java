@@ -20,23 +20,36 @@ public class FetchBasedOnStats {
     static void againstTypes(ArrayList<Type> typesSuperEffective, ArrayList<BigDecimal> damageSuperEffective) {
 
         int statProduct;
+        BigDecimal maxCP;
 
-        for (Pokedex pokes : Pokedex.values()) {
-            if (!Collections.disjoint(typesSuperEffective, Arrays.asList(pokes.getType()))) {
-                statProduct = combineStats(pokes);
-                pokesSuperEffective.add(pokes);
-                unsortMap.put(statProduct, pokes);
+        // iterate through each poke
+        for (Pokedex poke : Pokedex.values()) {
+            if (!Collections.disjoint(typesSuperEffective, Arrays.asList(poke.getType()))) {
+
+                statProduct = combineStats(poke);
+
+                maxCP = Maths.calculateMaxCP(poke);
+
+                //System.out.println(poke.getPokeName() + ": Max CP: " + maxCP);
+
+                pokesSuperEffective.add(poke);
+                unsortMap.put(statProduct, poke);
             }
         }
+        // reverse list so highest value appears at top
         sortedReverseObject.putAll(unsortMap);
 
+        // convert list to pokes
         ArrayList<Pokedex> valueList = new ArrayList<>(sortedReverseObject.values());
+
+        // get top 20
         List<Pokedex> mySubList = valueList.subList(0, 20);
 
-        for (Pokedex pokedex : mySubList) {
-            System.out.println(pokedex.getPokeName() + ": " +
-                    (pokedex.getPokeAttack() + pokedex.getPokeDefense() + pokedex.getPokeStamina()));
-        }
+        // print list
+        //for (Pokedex pokedex : mySubList) {
+        //   System.out.println(pokedex.getPokeName() + ": " +
+        //          (pokedex.getPokeAttack() + pokedex.getPokeDefense() + pokedex.getPokeStamina()));
+        //}
     }
 
     static private String listToString(Type[] type) {
@@ -46,4 +59,6 @@ public class FetchBasedOnStats {
     private static int combineStats(Pokedex poke) {
         return (poke.getPokeAttack() + poke.getPokeDefense() + poke.getPokeStamina());
     }
+
+
 }
