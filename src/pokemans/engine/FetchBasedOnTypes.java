@@ -12,16 +12,21 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class FetchBasedOnTypes {
+    // list of user-entered type(s)
     static final ArrayList<Type>
             userTypes = new ArrayList<>();
+
+    // lists of effective types
     static final ArrayList<Type> typesSuperEffective = new ArrayList<>();
     static final ArrayList<Type> typesNotEffective = new ArrayList<>();
-    static final ArrayList<BigDecimal>
-            damageSuperEffective = new ArrayList<>();
+
+    // lists of damage effectivenesses
+    static final ArrayList<BigDecimal> damageSuperEffective = new ArrayList<>();
     static final ArrayList<BigDecimal> damageNotEffective = new ArrayList<>();
 
+
     static void againstTypes(ArrayList<Type> userTypes) {
-        BigDecimal againstThis = new BigDecimal("0.0"), one = new BigDecimal("1");
+        BigDecimal againstThis, one = new BigDecimal("1");
         typesSuperEffective.clear();
         typesNotEffective.clear();
         damageSuperEffective.clear();
@@ -127,10 +132,6 @@ public class FetchBasedOnTypes {
                 }
             }
         }
-    }
-
-    public static void sendToFetchBasedOnStats() {
-        FetchBasedOnStats.againstTypes(typesSuperEffective, damageSuperEffective);
     }
 
     static public String listToString(ArrayList<Type> type) {

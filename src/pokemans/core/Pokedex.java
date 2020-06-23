@@ -2343,22 +2343,36 @@ public enum Pokedex {
 	public MovesFast[] getPokeMovesFast() {
 		return POKEMOVESFAST;
 	}
+
 	public MovesCinematic[] getPokeMovesCinematic() {
 		return POKEMOVESCINEMATIC;
 	}
+
 	public MovesFast[] getPokeMovesEliteFast() {
 		return POKEMOVESELITEFAST;
 	}
+
 	public MovesCinematic[] getPokeMovesEliteCinematic() {
 		return POKEMOVESELITECINEMATIC;
 	}
+
 	public MovesCinematic[] getPokeMovesShadowCinematic() {
 		return POKEMOVESSHADOWCINEMATIC;
 	}
+
 	public MovesCinematic[] getPokeMovesPurifiedCinematic() {
 		return POKEMOVESPURIFIEDCINEMATIC;
 	}
+
 	public Type[] getType() {
 		return TYPE;
+	}
+
+	public Type getType1() {
+		return TYPE[0];
+	}
+
+	public Type getType2() {
+		return TYPE[1];
 	}
 }

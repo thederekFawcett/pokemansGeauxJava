@@ -4,6 +4,7 @@
 
 package pokemans.engine;
 
+import pokemans.core.Pokedex;
 import pokemans.core.Type;
 
 import java.util.Scanner;
@@ -20,16 +21,15 @@ public class TypeInteractive {
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
 
-        //askForSecondType();
+        askForSecondType();
 
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
 
         // calculates type effectivenesses. adds them to list
         FetchBasedOnTypes.againstTypes(FetchBasedOnTypes.userTypes);
 
-        System.out.print("\nWhat would you like to see?:\nSuper-Effective types? (t) or Pokemon? (p): ");
+        System.out.print("\nWhat would you like to see?:\nSuper-Effective types? (t) or Pokemon? (p) or both? (b): ");
 
 
         /////////////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ public class TypeInteractive {
         //String userInput = in.nextLine().toUpperCase();
 
 
-        String userInput = "P";
+        String userInput = "A";
 
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
@@ -54,7 +54,17 @@ public class TypeInteractive {
                 quitLoop = true;
             }
             case "P" -> {
-                displayUsefulPokes();
+                displayUsefulPokesByMaxCP();
+                quitLoop = true;
+            }
+            case "C" -> {
+                displayUsefulPokesByCpTimesDamage();
+                quitLoop = true;
+            }
+            case "A" -> {
+                displayUsefulTypes();
+                displayUsefulPokesByMaxCP();
+                displayUsefulPokesByCpTimesDamage();
                 quitLoop = true;
             }
             default -> {
@@ -81,7 +91,7 @@ public class TypeInteractive {
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
 
-        String userInput = "POKEMON_TYPE_FIGHTING";
+        String userInput = "POKEMON_TYPE_ROCK";
         //String userInput = collectUserInputTypeAsString(in);
 
         /////////////////////////////////////////////////////////////////////
@@ -110,7 +120,7 @@ public class TypeInteractive {
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
 
-        String userInput = "POKEMON_TYPE_NORMAL";
+        String userInput = "POKEMON_TYPE_ICE";
         //String userInput = collectUserInputTypeAsString(in);
 
         boolean quitLoop = false;
@@ -147,20 +157,40 @@ public class TypeInteractive {
         // print results
         System.out.println("\nSuper Effective Damage Against: ");
         for (int row = 0; row < FetchBasedOnTypes.typesSuperEffective.size(); row++) {
-            System.out.println(String.format("%24s %12sx", FetchBasedOnTypes.typesSuperEffective.get(row),
+            // print table format
+            System.out.println(String.format("%22s %12sx", FetchBasedOnTypes.typesSuperEffective.get(row),
                     FetchBasedOnTypes.damageSuperEffective.get(row)));
         }
         System.out.println("\nNot Very Effective Damage Against: ");
         for (int row = 0; row < FetchBasedOnTypes.typesNotEffective.size(); row++) {
-            System.out.println(String.format("%24s %12sx", FetchBasedOnTypes.typesNotEffective.get(row),
+            System.out.println(String.format("%22s %12sx", FetchBasedOnTypes.typesNotEffective.get(row),
                     FetchBasedOnTypes.damageNotEffective.get(row)));
         }
     }
 
-    private static void displayUsefulPokes() {
+    private static void displayUsefulPokesByMaxCP() {
         System.out.println("\n\nTop 20 pokes to use against " +
-                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n");
-        FetchBasedOnTypes.sendToFetchBasedOnStats();
+                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
+                "\t(sorted by Max CP)\n");
+
+        FetchBasedOnStats.createListOfSuperEffectivePokes();
+
+        for (Pokedex poke : FetchBasedOnStats.sortedMaxCP()) {
+            System.out.println(String.format("%22s %12s", poke.getPokeName(), "cp" + Maths.calculateMaxCP(poke)));
+        }
+
+    }
+
+    private static void displayUsefulPokesByCpTimesDamage() {
+        System.out.println("\n\nTop 20 pokes to use against " +
+                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
+                "\t(sorted by Max CP * Type Effectiveness)\n");
+
+        FetchBasedOnStats.createListOfSuperEffectivePokes();
+
+        for (Pokedex poke : FetchBasedOnStats.sortedMaxCPAndDamage()) {
+            System.out.println(String.format("%22s %12s", poke.getPokeName(), Maths.calculateCPTimesDamage(poke)));
+        }
     }
 
     public static String collectUserInputTypeAsString(Scanner in) {
