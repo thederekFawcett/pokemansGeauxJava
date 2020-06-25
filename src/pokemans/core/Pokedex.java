@@ -1,20 +1,26 @@
 /*
- * Copyright (c) 2020, Derek Fawcett. All rights reserved.No usage without permission.
-*/
+ * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
 
- // **This file is auto-generated** 
+// **This file is auto-generated**
 
 package pokemans.core;
 
+import java.util.stream.Stream;
+
 public enum Pokedex {
 
-	BULBASAUR(Generation1.BULBASAUR), BULBASAUR_FALL_2019(Generation1.BULBASAUR_FALL_2019), BULBASAUR_NORMAL(Generation1.BULBASAUR_NORMAL), BULBASAUR_PURIFIED(Generation1.BULBASAUR_PURIFIED), BULBASAUR_SHADOW(Generation1.BULBASAUR_SHADOW), 
-	IVYSAUR(Generation1.IVYSAUR), IVYSAUR_NORMAL(Generation1.IVYSAUR_NORMAL), IVYSAUR_PURIFIED(Generation1.IVYSAUR_PURIFIED), IVYSAUR_SHADOW(Generation1.IVYSAUR_SHADOW), 
-	VENUSAUR(Generation1.VENUSAUR), VENUSAUR_COPY_2019(Generation1.VENUSAUR_COPY_2019), VENUSAUR_NORMAL(Generation1.VENUSAUR_NORMAL), VENUSAUR_PURIFIED(Generation1.VENUSAUR_PURIFIED), VENUSAUR_SHADOW(Generation1.VENUSAUR_SHADOW), 
-	CHARMANDER(Generation1.CHARMANDER), CHARMANDER_FALL_2019(Generation1.CHARMANDER_FALL_2019), CHARMANDER_NORMAL(Generation1.CHARMANDER_NORMAL), CHARMANDER_PURIFIED(Generation1.CHARMANDER_PURIFIED), CHARMANDER_SHADOW(Generation1.CHARMANDER_SHADOW), 
-	CHARMELEON(Generation1.CHARMELEON), CHARMELEON_NORMAL(Generation1.CHARMELEON_NORMAL), CHARMELEON_PURIFIED(Generation1.CHARMELEON_PURIFIED), CHARMELEON_SHADOW(Generation1.CHARMELEON_SHADOW), 
-	CHARIZARD(Generation1.CHARIZARD), CHARIZARD_COPY_2019(Generation1.CHARIZARD_COPY_2019), CHARIZARD_NORMAL(Generation1.CHARIZARD_NORMAL), CHARIZARD_PURIFIED(Generation1.CHARIZARD_PURIFIED), CHARIZARD_SHADOW(Generation1.CHARIZARD_SHADOW), 
-	SQUIRTLE(Generation1.SQUIRTLE), SQUIRTLE_FALL_2019(Generation1.SQUIRTLE_FALL_2019), SQUIRTLE_NORMAL(Generation1.SQUIRTLE_NORMAL), SQUIRTLE_PURIFIED(Generation1.SQUIRTLE_PURIFIED), SQUIRTLE_SHADOW(Generation1.SQUIRTLE_SHADOW), 
+  BULBASAUR(Generation1.BULBASAUR), BULBASAUR_FALL_2019(Generation1.BULBASAUR_FALL_2019), BULBASAUR_NORMAL(Generation1.BULBASAUR_NORMAL), BULBASAUR_PURIFIED(Generation1.BULBASAUR_PURIFIED), BULBASAUR_SHADOW(Generation1.BULBASAUR_SHADOW),
+  IVYSAUR(Generation1.IVYSAUR), IVYSAUR_NORMAL(Generation1.IVYSAUR_NORMAL), IVYSAUR_PURIFIED(Generation1.IVYSAUR_PURIFIED), IVYSAUR_SHADOW(Generation1.IVYSAUR_SHADOW),
+  VENUSAUR(Generation1.VENUSAUR), VENUSAUR_COPY_2019(Generation1.VENUSAUR_COPY_2019), VENUSAUR_NORMAL(Generation1.VENUSAUR_NORMAL), VENUSAUR_PURIFIED(Generation1.VENUSAUR_PURIFIED), VENUSAUR_SHADOW(Generation1.VENUSAUR_SHADOW),
+  CHARMANDER(Generation1.CHARMANDER), CHARMANDER_FALL_2019(Generation1.CHARMANDER_FALL_2019), CHARMANDER_NORMAL(Generation1.CHARMANDER_NORMAL), CHARMANDER_PURIFIED(Generation1.CHARMANDER_PURIFIED), CHARMANDER_SHADOW(Generation1.CHARMANDER_SHADOW),
+  CHARMELEON(Generation1.CHARMELEON), CHARMELEON_NORMAL(Generation1.CHARMELEON_NORMAL), CHARMELEON_PURIFIED(Generation1.CHARMELEON_PURIFIED), CHARMELEON_SHADOW(Generation1.CHARMELEON_SHADOW),
+  CHARIZARD(Generation1.CHARIZARD), CHARIZARD_COPY_2019(Generation1.CHARIZARD_COPY_2019), CHARIZARD_NORMAL(Generation1.CHARIZARD_NORMAL), CHARIZARD_PURIFIED(Generation1.CHARIZARD_PURIFIED), CHARIZARD_SHADOW(Generation1.CHARIZARD_SHADOW),
+  SQUIRTLE(Generation1.SQUIRTLE), SQUIRTLE_FALL_2019(Generation1.SQUIRTLE_FALL_2019), SQUIRTLE_NORMAL(Generation1.SQUIRTLE_NORMAL), SQUIRTLE_PURIFIED(Generation1.SQUIRTLE_PURIFIED), SQUIRTLE_SHADOW(Generation1.SQUIRTLE_SHADOW),
 	WARTORTLE(Generation1.WARTORTLE), WARTORTLE_NORMAL(Generation1.WARTORTLE_NORMAL), WARTORTLE_PURIFIED(Generation1.WARTORTLE_PURIFIED), WARTORTLE_SHADOW(Generation1.WARTORTLE_SHADOW), 
 	BLASTOISE(Generation1.BLASTOISE), BLASTOISE_COPY_2019(Generation1.BLASTOISE_COPY_2019), BLASTOISE_NORMAL(Generation1.BLASTOISE_NORMAL), BLASTOISE_PURIFIED(Generation1.BLASTOISE_PURIFIED), BLASTOISE_SHADOW(Generation1.BLASTOISE_SHADOW), 
 	CATERPIE(Generation1.CATERPIE), 
@@ -2343,36 +2349,40 @@ public enum Pokedex {
 	public MovesFast[] getPokeMovesFast() {
 		return POKEMOVESFAST;
 	}
-
 	public MovesCinematic[] getPokeMovesCinematic() {
 		return POKEMOVESCINEMATIC;
 	}
-
 	public MovesFast[] getPokeMovesEliteFast() {
 		return POKEMOVESELITEFAST;
 	}
-
 	public MovesCinematic[] getPokeMovesEliteCinematic() {
 		return POKEMOVESELITECINEMATIC;
 	}
-
 	public MovesCinematic[] getPokeMovesShadowCinematic() {
 		return POKEMOVESSHADOWCINEMATIC;
 	}
-
 	public MovesCinematic[] getPokeMovesPurifiedCinematic() {
 		return POKEMOVESPURIFIEDCINEMATIC;
-	}
+    }
 
-	public Type[] getType() {
-		return TYPE;
-	}
+  public Type[] getType() {
+    return TYPE;
+  }
 
-	public Type getType1() {
-		return TYPE[0];
-	}
+  public Type getType1() {
+    return TYPE[0];
+  }
 
-	public Type getType2() {
-		return TYPE[1];
-	}
+  public Type getType2() {
+    return TYPE[1];
+  }
+
+  public MovesCinematic[] getAllCinematicMoves() {
+    return Stream.of(getPokeMovesCinematic(), getPokeMovesEliteCinematic(), getPokeMovesShadowCinematic(),
+            getPokeMovesPurifiedCinematic()).flatMap(Stream::of).toArray(MovesCinematic[]::new);
+  }
+
+  public MovesFast[] getAllFastMoves() {
+    return Stream.of(getPokeMovesFast(), getPokeMovesEliteFast()).flatMap(Stream::of).toArray(MovesFast[]::new);
+  }
 }

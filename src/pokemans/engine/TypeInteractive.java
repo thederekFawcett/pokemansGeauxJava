@@ -1,5 +1,9 @@
 /*
- * Copyright (c) 2020, Derek Fawcett. All rights reserved. No usage without permission.
+ * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
 package pokemans.engine;
@@ -16,10 +20,6 @@ public class TypeInteractive {
         String wantContinue;
         //do {
         askForFirstType();
-
-
-        /////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////
 
         askForSecondType();
 
@@ -44,6 +44,7 @@ public class TypeInteractive {
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
 
+        FetchBasedOnStats.createListOfSuperEffectivePokes();
 
         boolean quitLoop = false;
         //do {
@@ -63,8 +64,9 @@ public class TypeInteractive {
             }
             case "A" -> {
                 displayUsefulTypes();
-                displayUsefulPokesByMaxCP();
+                //displayUsefulPokesByMaxCP();
                 displayUsefulPokesByCpTimesDamage();
+                displayPokesByCPTDAndMove();
                 quitLoop = true;
             }
             default -> {
@@ -73,6 +75,8 @@ public class TypeInteractive {
                 quitLoop = false;
             }
         }
+
+
         // } while (!quitLoop);
 
         //      System.out.print("\nWould you like to try again? y/n: ");
@@ -173,9 +177,7 @@ public class TypeInteractive {
                 FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
                 "\t(sorted by Max CP)\n");
 
-        FetchBasedOnStats.createListOfSuperEffectivePokes();
-
-        for (Pokedex poke : FetchBasedOnStats.sortedMaxCP()) {
+        for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCP()) {
             System.out.println(String.format("%22s %12s", poke.getPokeName(), "cp" + Maths.calculateMaxCP(poke)));
         }
 
@@ -186,10 +188,19 @@ public class TypeInteractive {
                 FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
                 "\t(sorted by Max CP * Type Effectiveness)\n");
 
-        FetchBasedOnStats.createListOfSuperEffectivePokes();
+        for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCPAndDamage()) {
+            System.out.println(String.format("%21s %12s", poke.getPokeName(), Maths.calculateCPTimesDamageForPoke(poke)));
+        }
+    }
 
-        for (Pokedex poke : FetchBasedOnStats.sortedMaxCPAndDamage()) {
-            System.out.println(String.format("%22s %12s", poke.getPokeName(), Maths.calculateCPTimesDamage(poke)));
+    private static void displayPokesByCPTDAndMove() {
+        System.out.println("\n\nTop 20 pokes to use against " +
+                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
+                "\t(sorted by (MaxCP * TypeEffectiveness) * ChargeMoveDPE)\n");
+
+        for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCPTDAndMoveDPE()) {
+            System.out.println(String.format("%21s %14s %12s", poke.getPokeName(), Maths.getHighestValueMoveName(poke),
+                    Maths.calculateCPTDAndMove(poke)));
         }
     }
 
