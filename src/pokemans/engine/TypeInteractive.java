@@ -1,51 +1,64 @@
 /*
- * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
+ * Copyright (c) 2020 Derek Fawcett (@the_derek). All rights reserved. No usage without permission.
  */
 
 package pokemans.engine;
 
 import pokemans.core.Pokedex;
 import pokemans.core.Type;
+import pokemans.user.UserPokemon;
 
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TypeInteractive {
-    static Scanner in;
-
-    public static void main(String[] args) {
+    private static final List<UserPokemon> userPokes = new ArrayList<>();
+    private static Scanner in;
+    private static boolean isPoke = false;
+    private static String pokeName;
+    
+    static public void hello(List<UserPokemon> pokes) {
+        userPokes.addAll(pokes);
+    }
+    
+    static public void main(String[] args) {
         String wantContinue;
         //do {
         askForFirstType();
-
-        askForSecondType();
-
+        
+        if (!isPoke) {
+            askForSecondType();
+        }
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
+        
         // calculates type effectivenesses. adds them to list
         FetchBasedOnTypes.againstTypes(FetchBasedOnTypes.userTypes);
-
+        
         System.out.print("\nWhat would you like to see?:\nSuper-Effective types? (t) or Pokemon? (p) or both? (b): ");
-
-
+        
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
+        
         //in = new Scanner(System.in);
         //String userInput = in.nextLine().toUpperCase();
-
-
-        String userInput = "A";
-
+        
+        
+        String userInput = "C";
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
+        
         FetchBasedOnStats.createListOfSuperEffectivePokes();
-
+        //FetchBasedOnStats.createListOfSuperEffectiveUserPokes(userPokes);
+        
+        printToUseAgainst();
+        
         boolean quitLoop = false;
         //do {
         switch (userInput) {
@@ -55,17 +68,22 @@ public class TypeInteractive {
                 quitLoop = true;
             }
             case "P" -> {
-                displayUsefulPokesByMaxCP();
+                displayUserPokesJustByCP();
+                //displayUsefulPokesByMaxCP();
                 quitLoop = true;
             }
             case "C" -> {
-                displayUsefulPokesByCpTimesDamage();
+                displayUserPokesByCpTimesDamageEffectiveness();
+                //displayUsefulPokesByCpTimesDamageEffectiveness();
                 quitLoop = true;
             }
             case "A" -> {
                 displayUsefulTypes();
+    
+                //FetchBasedOnTypes.checkPokeWeaknesses(Pokedex.MACHAMP);
+    
                 //displayUsefulPokesByMaxCP();
-                displayUsefulPokesByCpTimesDamage();
+                //displayUsefulPokesByCpTimesDamage();
                 displayPokesByCPTDAndMove();
                 quitLoop = true;
             }
@@ -75,58 +93,77 @@ public class TypeInteractive {
                 quitLoop = false;
             }
         }
-
-
+        
+        
         // } while (!quitLoop);
-
+        
         //      System.out.print("\nWould you like to try again? y/n: ");
         //      wantContinue = in.nextLine().toUpperCase();
-
+        
         //  } while (wantContinue.equals("Y"));
     }
-
+    
     private static void askForFirstType() {
         FetchBasedOnTypes.userTypes.clear();
-
+        
         // collect user input
-        System.out.print("\n\nPlease enter a type (x to exit): ");
-
-
+        System.out.print("\n\nPlease enter a poke name or type (x to exit): ");
+        
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
-        String userInput = "POKEMON_TYPE_ROCK";
+        
+        String userInput = "GENGAR";
+        //String userInput = "POKEMON_TYPE_ROCK";
         //String userInput = collectUserInputTypeAsString(in);
-
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
-
-        // convert userInput to Type
-        Type userType = Type.stringToType(userInput);
-
-        if (userInput.endsWith("TYPE_X")) {
-            System.exit(0);
+        
+        
+        boolean exitLoop = false;
+        while (!exitLoop) {
+            
+            // convert userInput to Type
+            Type userType = Type.stringToType(userInput);
+            
+            if (userInput.endsWith("TYPE_X")) {
+                System.exit(0);
+            } else if (Pokedex.getAllPokeNames().contains(userInput)) {
+                
+                Pokedex userPoke = Pokedex.getPokeFromString(userInput);
+                assert userPoke != null;
+                pokeName = userPoke.getPokeName();
+                FetchBasedOnTypes.userTypes.addAll(Arrays.asList(userPoke.getType()));
+                isPoke = true;
+                exitLoop = true;
+                
+            } else if (!userType.equals(null)) {
+                
+                FetchBasedOnTypes.userTypes.add(userType);
+                exitLoop = true;
+                
+            } else {
+                
+                System.out.print("\n  *Not a valid entry!* Please try again: ");
+                //userType = collectUserInputTypeAsType(in);
+                userInput = collectUserInputTypeAsString(in);
+                
+            }
         }
-        while (userType == null) {
-            System.out.print("\n*Type not valid!* Please try again: ");
-            userType = collectUserInputTypeAsType(in);
-        }
-
-        FetchBasedOnTypes.userTypes.add(userType);
     }
-
-    public static void askForSecondType() {
+    
+    private static void askForSecondType() {
         // collect user input
         System.out.print("\nSecond type: (n if none, x to exit): ");
-
-
+        
+        
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
-
+        
         String userInput = "POKEMON_TYPE_ICE";
         //String userInput = collectUserInputTypeAsString(in);
-
+        
         boolean quitLoop = false;
         do {
             // convert userInput to Type
@@ -147,75 +184,100 @@ public class TypeInteractive {
                 quitLoop = true;
             }
         } while (!quitLoop);
-
+        
         if (!userInput.endsWith("TYPE_N")) {
             FetchBasedOnTypes.userTypes.add(Type.stringToType(userInput));
         }
     }
-
+    
     private static void displayUsefulTypes() {
-
-        System.out.println("\n\nType to use against " +
-                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + ":");
-
+        
         // print results
         System.out.println("\nSuper Effective Damage Against: ");
         for (int row = 0; row < FetchBasedOnTypes.typesSuperEffective.size(); row++) {
+    
             // print table format
+    
             System.out.println(String.format("%22s %12sx", FetchBasedOnTypes.typesSuperEffective.get(row),
                     FetchBasedOnTypes.damageSuperEffective.get(row)));
         }
+        
+        
         System.out.println("\nNot Very Effective Damage Against: ");
+        
+        
         for (int row = 0; row < FetchBasedOnTypes.typesNotEffective.size(); row++) {
             System.out.println(String.format("%22s %12sx", FetchBasedOnTypes.typesNotEffective.get(row),
                     FetchBasedOnTypes.damageNotEffective.get(row)));
         }
     }
-
+    
+    private static void displayUserPokesJustByCP() {
+        System.out.println("\n\n\tTop pokes\n(sorted by CP):\n");
+        
+        for (UserPokemon userPoke : FetchBasedOnStats.createListOfAllUserPokesSortedByCP(userPokes)) {
+            System.out.println(String.format("%22s %12s", userPoke.getUserPokeName(), "cp" + userPoke.getUserPokeCP()));
+        }
+    }
+    
     private static void displayUsefulPokesByMaxCP() {
-        System.out.println("\n\nTop 20 pokes to use against " +
-                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
-                "\t(sorted by Max CP)\n");
-
+        System.out.println("\n\n\tTop 20 pokes\n(sorted by Max CP):\n");
+        
         for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCP()) {
             System.out.println(String.format("%22s %12s", poke.getPokeName(), "cp" + Maths.calculateMaxCP(poke)));
         }
-
     }
-
-    private static void displayUsefulPokesByCpTimesDamage() {
-        System.out.println("\n\nTop 20 pokes to use against " +
-                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
-                "\t(sorted by Max CP * Type Effectiveness)\n");
-
-        for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCPAndDamage()) {
+    
+    private static void displayUsefulPokesByCpTimesDamageEffectiveness() {
+        System.out.println("\n\n\tTop 20 pokes\n(sorted by (Max CP * type effectiveness)):\n");
+        
+        for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCPTimesDamageEffectiveness()) {
             System.out.println(String.format("%21s %12s", poke.getPokeName(), Maths.calculateCPTimesDamageForPoke(poke)));
         }
     }
-
+    
+    private static void displayUserPokesByCpTimesDamageEffectiveness() {
+        System.out.println("\n\tTop 20 pokes\n(sorted by (Max CP * type effectiveness)):\n");
+        
+        for (UserPokemon poke : FetchBasedOnStats.createUserListSortedByMaxCPTimesDamageEffectiveness(userPokes)) {
+            System.out.println(String.format("%21s %12s", poke.getUserPokeName(), Maths.calculateUserCPTimesDamage(poke).setScale(0, RoundingMode.DOWN)));
+        }
+    }
+    
     private static void displayPokesByCPTDAndMove() {
-        System.out.println("\n\nTop 20 pokes to use against " +
-                FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes) + "\n" +
-                "\t(sorted by (MaxCP * TypeEffectiveness) * ChargeMoveDPE)\n");
-
+        System.out.println("\n\n\tTop 20 pokes\n(sorted by (Max CP * type effectiveness * best charge move DPE))):\n");
+        
         for (Pokedex poke : FetchBasedOnStats.createListSortedByMaxCPTDAndMoveDPE()) {
             System.out.println(String.format("%21s %14s %12s", poke.getPokeName(), Maths.getHighestValueMoveName(poke),
                     Maths.calculateCPTDAndMove(poke)));
         }
     }
-
-    public static String collectUserInputTypeAsString(Scanner in) {
+    
+    private static String collectUserInputTypeAsString(Scanner in) {
         in = new Scanner(System.in);
-        return convertStringToFullName(in.nextLine().toUpperCase());
+        return convertUserInputStringToFullTypeName(in.nextLine().toUpperCase());
     }
-
-    public static Type collectUserInputTypeAsType(Scanner in) {
+    
+    private static Type collectUserInputTypeAsType(Scanner in) {
         in = new Scanner(System.in);
-        return Type.stringToType(convertStringToFullName(in.nextLine().toUpperCase()));
+        return Type.stringToType(convertUserInputStringToFullTypeName(in.nextLine().toUpperCase()));
     }
-
-    public static String convertStringToFullName(String userInput) {
+    
+    private static String convertUserInputStringToFullTypeName(String userInput) {
         userInput = "POKEMON_TYPE_" + userInput;
         return userInput;
+    }
+    
+    private static void printToUseAgainst() {
+        if (isPoke) {
+            System.out.print("\n\n----------------------------------------\n\t" +
+                    "What to use against\n\t" +
+                    "Name: " + pokeName + "\n\tTyping: ");
+        } else {
+            System.out.print("\n\n----------------------------------------\n\t" +
+                    "What to use against\n\t" +
+                    "Type(s): ");
+        }
+        System.out.println(FetchBasedOnTypes.listToString(FetchBasedOnTypes.userTypes));
     }
 }

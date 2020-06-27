@@ -1,9 +1,5 @@
 /*
- * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
+ * Copyright (c) 2020 Derek Fawcett (@the_derek). All rights reserved. No usage without permission.
  */
 
 package pokemans.engine;
@@ -11,6 +7,7 @@ package pokemans.engine;
 import pokemans.core.MovesCinematic;
 import pokemans.core.Pokedex;
 import pokemans.core.Type;
+import pokemans.user.UserPokemon;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -20,38 +17,61 @@ import java.util.Collections;
 
 public class Maths {
   private static final MathContext mc = new MathContext(9);
-  private static final BigDecimal attackIV = new BigDecimal("15"),
-          defenseIV = new BigDecimal("15"),
-          staminaIV = new BigDecimal("15");
-  private static final BigDecimal cpMultiplier = new BigDecimal("0");
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // calculate actual stats
-  public static BigDecimal calculateActualAttack(Pokedex poke, BigDecimal pokeLevelCPM) {
-    return ((BigDecimal.valueOf(poke.getPokeAttack()).add(attackIV)).multiply(pokeLevelCPM));
+  
+  /////////////////////////////////////////////////////////////////////////////////////
+  // user poke maths below
+  
+  public static BigDecimal calculateUserPokeCP(UserPokemon poke) {
+    
+    BigDecimal attackBase = BigDecimal.valueOf(poke.getUserPokeAttackBase());
+    BigDecimal defenseBase = BigDecimal.valueOf(poke.getUserPokeDefenseBase());
+    BigDecimal staminaBase = BigDecimal.valueOf(poke.getUserPokeStaminaBase());
+    BigDecimal attackIV = poke.getUserPokeAttackIV();
+    BigDecimal defenseIV = poke.getUserPokeDefenseIV();
+    BigDecimal staminaIV = poke.getUserPokeStaminaIV();
+    
+    // @formatter:off
+    BigDecimal cp =
+            (((attackBase.add(attackIV))
+                    .multiply((defenseBase.add(defenseIV)).sqrt(mc))
+                    .multiply(((staminaBase.add(staminaIV)).sqrt(mc))))
+                    .multiply((poke.getUserPokeLevel()).pow(2))
+                    .divide(BigDecimal.valueOf(10), RoundingMode.FLOOR))
+                    .setScale(0, RoundingMode.DOWN);
+    // @formatter:on
+    return cp;
   }
-
-  public static BigDecimal calculateActualDefense(Pokedex poke, BigDecimal pokeLevelCPM) {
-    return ((BigDecimal.valueOf(poke.getPokeDefense()).add(attackIV)).multiply(pokeLevelCPM));
+  
+  // calculate useful CP values
+  public static BigDecimal calculateUserCPTimesDamage(UserPokemon poke) {
+    if (poke.getUserPokeType().length == 1) {
+      return poke.getUserPokeCP()
+              .multiply(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getUserPokeType1()));
+    } else {
+      return poke.getUserPokeCP()
+              .multiply(
+                      (FetchBasedOnTypes.typeEffectivenessCalculator(poke.getUserPokeType1()))
+                              .max(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getUserPokeType2())));
+    }
   }
-
-  public static BigDecimal calculateActualStamina(Pokedex poke, BigDecimal pokeLevelCPM) {
-    return ((BigDecimal.valueOf(poke.getPokeStamina()).add(attackIV)).multiply(pokeLevelCPM));
-  }
-
+  
+  /////////////////////////////////////////////////////////////////////////////////////
+  // pokedex maths below
+  
   // calculate CP's
   public static BigDecimal calculateMaxCP(Pokedex poke) {
-    return calculateCP(poke, CPMultiplier.levels[39]);
+    return calculatePokedexPossibleCP(poke, CPMultiplier.levels[39]);
   }
-
-  public static BigDecimal calculateCP(Pokedex poke, BigDecimal pokeLevelCPM) {
-
+  
+  public static BigDecimal calculatePokedexPossibleCP(Pokedex poke, BigDecimal pokeLevelCPM) {
+    
     BigDecimal attackBase = BigDecimal.valueOf(poke.getPokeAttack());
     BigDecimal defenseBase = BigDecimal.valueOf(poke.getPokeDefense());
     BigDecimal staminaBase = BigDecimal.valueOf(poke.getPokeStamina());
-
+    final BigDecimal attackIV = new BigDecimal("15"),
+            defenseIV = new BigDecimal("15"),
+            staminaIV = new BigDecimal("15");
+    
     // @formatter:off
     BigDecimal cp =
             (((attackBase.add(attackIV))
@@ -71,8 +91,9 @@ public class Maths {
               .multiply(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType1()));
     } else {
       return calculateMaxCP(poke)
-              .multiply((FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType1()))
-                      .max(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType2())));
+              .multiply(
+                      (FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType1()))
+                              .max(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType2())));
     }
   }
 
@@ -202,13 +223,5 @@ public class Maths {
     }
 
     return moveName;
-  }
-
-  public BigDecimal halfLevelCPM(int lowerLevel, int higherLevel) {
-    BigDecimal two = new BigDecimal("2");
-    BigDecimal lowerLevelCPM = CPMultiplier.levels[lowerLevel];
-    BigDecimal higherLevelCPM = CPMultiplier.levels[higherLevel];
-
-    return (lowerLevelCPM.add(higherLevelCPM)).divide(two, mc);
   }
 }

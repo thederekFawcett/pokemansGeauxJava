@@ -1,9 +1,5 @@
 /*
- * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
+ * Copyright (c) 2020, Derek Fawcett. All rights reserved.No usage without permission.
  */
 
  // **This file is auto-generated** 
@@ -18,7 +14,7 @@ public enum Type {
 	// 5 = Rock	 6 = Bug	7 = Ghost	 8 = Steel	9 = Fire
 	// 10 = Water	11 = Grass	12 = Electric	13 = Psychic	14 = Ice
 	//15 = Dragon	16 = Dark	17 = Fairy
-
+	
 	POKEMON_TYPE_BUG("POKEMON_TYPE_BUG", new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"),
 			new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("0.625"),
 			new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.6"), new BigDecimal("1.0"),
@@ -91,11 +87,11 @@ public enum Type {
 			new BigDecimal("1.6"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.6"),
 			new BigDecimal("0.625"), new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"), new BigDecimal("1.0"),
 			new BigDecimal("0.625"), new BigDecimal("1.0"), new BigDecimal("1.0"));
-
+	
 	private final BigDecimal NORMAL, FIGHTING, FLYING, POISON, GROUND, ROCK, BUG, GHOST, STEEL, FIRE,
 			WATER, GRASS, ELECTRIC, PSYCHIC, ICE, DRAGON, DARK, FAIRY;
 	private final String TYPENAME;
-
+	
 	Type(String TYPENAME, BigDecimal NORMAL, BigDecimal FIGHTING, BigDecimal FLYING, BigDecimal POISON,
 		 BigDecimal GROUND, BigDecimal ROCK, BigDecimal BUG, BigDecimal GHOST, BigDecimal STEEL, BigDecimal FIRE,
 		 BigDecimal WATER, BigDecimal GRASS, BigDecimal ELECTRIC, BigDecimal PSYCHIC, BigDecimal ICE,

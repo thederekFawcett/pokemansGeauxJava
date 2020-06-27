@@ -1,36 +1,40 @@
 /*
- * Copyright (c) 2020. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
- * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
- * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
- * Vestibulum commodo. Ut rhoncus gravida arcu.
+ * Copyright (c) 2020 Derek Fawcett (@the_derek). All rights reserved. No usage without permission.
  */
 
 package pokemans.engine;
 
+import pokemans.core.Pokedex;
 import pokemans.core.Type;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FetchBasedOnTypes {
   // list of user-entered type(s)
   static final ArrayList<Type> userTypes = new ArrayList<>();
-
+  
   // list of all effectiveness
+  static final ArrayList<Type> allEffectiveTypesPre = new ArrayList<>();
+  static final ArrayList<BigDecimal> allEffectiveDamagesPre = new ArrayList<>();
   static final ArrayList<Type> allEffectiveTypes = new ArrayList<>();
   static final ArrayList<BigDecimal> allEffectiveDamages = new ArrayList<>();
-
+  static final ArrayList<Type> allEffectiveTypesFinal = new ArrayList<>();
+  static final ArrayList<BigDecimal> allEffectiveDamagesFinal = new ArrayList<>();
+  
   // lists of effective types
   static final ArrayList<Type> typesSuperEffective = new ArrayList<>();
+  static final ArrayList<Type> typesNormalEffective = new ArrayList<>();
   static final ArrayList<Type> typesNotEffective = new ArrayList<>();
-
-  // lists of damage effectivenesses
+  
+  // lists of damage effectiveness
   static final ArrayList<BigDecimal> damageSuperEffective = new ArrayList<>();
+  static final ArrayList<BigDecimal> damageNormalEffective = new ArrayList<>();
   static final ArrayList<BigDecimal> damageNotEffective = new ArrayList<>();
-
+  
   static void againstTypes(ArrayList<Type> userTypes) {
     BigDecimal againstThis, one = new BigDecimal("1");
     typesSuperEffective.clear();
@@ -39,7 +43,7 @@ public class FetchBasedOnTypes {
     damageNotEffective.clear();
     Type[] types = Type.values();
     String typeName1, typeName2, endingName1, endingName2 = "";
-
+    
     // isolate name of Type
     if (userTypes.size() == 1) {
       typeName1 = userTypes.get(0).getTYPENAME();
@@ -50,7 +54,7 @@ public class FetchBasedOnTypes {
       typeName2 = userTypes.get(1).getTYPENAME();
       endingName2 = typeName2.substring(13);
     }
-
+    
     // check against each type
     for (Type type : types) {
       // check each "get type" method for each type
@@ -62,13 +66,16 @@ public class FetchBasedOnTypes {
           try {
             final Object damageFactor = m.invoke(type);
             againstThis = (BigDecimal) damageFactor;
-
+            
             allEffectiveTypes.add(type);
             allEffectiveDamages.add(againstThis);
-
+            
             if ((againstThis.compareTo(one)) > 0) {
               typesSuperEffective.add(type);
               damageSuperEffective.add(againstThis);
+            } else if (againstThis.compareTo(one) == 0) {
+              typesNormalEffective.add(type);
+              damageNormalEffective.add(againstThis);
             } else if (againstThis.compareTo(one) < 0) {
               typesNotEffective.add(type);
               damageNotEffective.add(againstThis);
@@ -84,13 +91,16 @@ public class FetchBasedOnTypes {
           try {
             final Object damageFactor = m.invoke(type);
             againstThis = (BigDecimal) damageFactor;
-
+            
             allEffectiveTypes.add(type);
             allEffectiveDamages.add(againstThis);
-
+            
             if ((againstThis.compareTo(one)) > 0) {
               typesSuperEffective.add(type);
               damageSuperEffective.add(againstThis);
+            } else if (againstThis.compareTo(one) == 0) {
+              typesNormalEffective.add(type);
+              damageNormalEffective.add(againstThis);
             } else if (againstThis.compareTo(one) < 0) {
               typesNotEffective.add(type);
               damageNotEffective.add(againstThis);
@@ -101,7 +111,7 @@ public class FetchBasedOnTypes {
         }
       }
     }
-
+    
     // check if duplicates exists in super effective, AND not effective and do maths
     if (typesSuperEffective.size() > typesNotEffective.size()) {
       // bigger list first two, smaller list second two
@@ -111,12 +121,44 @@ public class FetchBasedOnTypes {
       calculateMathsForDuplicatesOpposites(
               typesSuperEffective, damageSuperEffective, typesNotEffective, damageNotEffective);
     }
-
+    
     // check if duplicates exists in super effective, OR not effective and do maths
     calculateMathsForDuplicatesSameSide(typesNotEffective, damageNotEffective);
     calculateMathsForDuplicatesSameSide(typesSuperEffective, damageSuperEffective);
+    
+    allEffectiveTypesPre.addAll(typesSuperEffective);
+    allEffectiveTypesPre.addAll(typesNormalEffective);
+    allEffectiveTypesPre.addAll(typesNotEffective);
+    
+    allEffectiveDamagesPre.addAll(damageSuperEffective);
+    allEffectiveDamagesPre.addAll(damageNormalEffective);
+    allEffectiveDamagesPre.addAll(damageNotEffective);
+    
+    findDuplicatesTypes(allEffectiveTypes, allEffectiveDamages);
   }
-
+  
+  public static void findDuplicatesTypes(
+          List<Type> allEffectiveTypes, List<BigDecimal> allEffectiveDamages) {
+    
+    // final Set<Type> set1 = new HashSet<Type>();
+    
+    for (int i = 0; i < allEffectiveTypes.size(); i++) {
+      // if (!set1.add(allEffectiveTypes.get(i))) {
+      if (!allEffectiveTypesFinal.contains(allEffectiveTypes.get(i))) {
+        
+        allEffectiveTypesFinal.add(allEffectiveTypes.get(i));
+        allEffectiveDamagesFinal.add(allEffectiveDamages.get(i));
+        
+      } else {
+        int place = allEffectiveTypesFinal.indexOf(allEffectiveTypes.get(i));
+        BigDecimal combinedDamage =
+                (allEffectiveDamagesFinal.get(place)).multiply(allEffectiveDamages.get(i));
+        
+        allEffectiveDamagesFinal.set(place, combinedDamage);
+      }
+    }
+  }
+  
   public static void calculateMathsForDuplicatesOpposites(
           ArrayList<Type> smallerListType,
           ArrayList<BigDecimal> smallerListDamage,
@@ -146,7 +188,7 @@ public class FetchBasedOnTypes {
       }
     }
   }
-
+  
   public static void calculateMathsForDuplicatesSameSide(
           ArrayList<Type> listType, ArrayList<BigDecimal> listDamage) {
     for (int smallCount = 0; smallCount < listType.size(); smallCount++) {
@@ -161,11 +203,98 @@ public class FetchBasedOnTypes {
       }
     }
   }
-
+  
   public static String listToString(ArrayList<Type> type) {
     return type.toString().replace("[", "").replace("]", "");
   }
-
+  
+  public static BigDecimal checkPokeWeaknesses(Pokedex poke) {
+    BigDecimal effectiveness = null;
+    BigDecimal bug = new BigDecimal("1.0"),
+            dark = new BigDecimal("1.0"),
+            dragon = new BigDecimal("1.0"),
+            electric = new BigDecimal("1.0"),
+            fairy = new BigDecimal("1.0"),
+            fighting = new BigDecimal("1.0"),
+            fire = new BigDecimal("1.0"),
+            flying = new BigDecimal("1.0"),
+            ghost = new BigDecimal("1.0"),
+            grass = new BigDecimal("1.0"),
+            ground = new BigDecimal("1.0"),
+            ice = new BigDecimal("1.0"),
+            normal = new BigDecimal("1.0"),
+            poison = new BigDecimal("1.0"),
+            psychic = new BigDecimal("1.0"),
+            rock = new BigDecimal("1.0"),
+            steel = new BigDecimal("1.0"),
+            water = new BigDecimal("1.0");
+    
+    for (Type type : poke.getType()) {
+      
+      BigDecimal damage = null;
+      switch (type.toString().toUpperCase()) {
+        case "POKEMON_TYPE_BUG":
+          bug = damage;
+          break;
+        case "POKEMON_TYPE_DARK":
+          dark = damage;
+          break;
+        case "POKEMON_TYPE_DRAGON":
+          dragon = damage;
+          break;
+        case "POKEMON_TYPE_ELECTRIC":
+          electric = damage;
+          break;
+        case "POKEMON_TYPE_FAIRY":
+          fairy = damage;
+          break;
+        case "POKEMON_TYPE_FIGHTING":
+          fighting = damage;
+          break;
+        case "POKEMON_TYPE_FIRE":
+          fire = damage;
+          break;
+        case "POKEMON_TYPE_FLYING":
+          flying = damage;
+          break;
+        case "POKEMON_TYPE_GHOST":
+          ghost = damage;
+          break;
+        case "POKEMON_TYPE_GRASS":
+          grass = damage;
+          break;
+        case "POKEMON_TYPE_GROUND":
+          ground = damage;
+          break;
+        case "POKEMON_TYPE_ICE":
+          ice = damage;
+          break;
+        case "POKEMON_TYPE_NORMAL":
+          normal = damage;
+          break;
+        case "POKEMON_TYPE_POISON":
+          poison = damage;
+          break;
+        case "POKEMON_TYPE_PSYCHIC":
+          psychic = damage;
+          break;
+        case "POKEMON_TYPE_ROCK":
+          rock = damage;
+          break;
+        case "POKEMON_TYPE_STEEL":
+          steel = damage;
+          break;
+        case "POKEMON_TYPE_WATER":
+          water = damage;
+          break;
+        default:
+          break;
+      }
+    }
+    
+    return effectiveness;
+  }
+  
   static BigDecimal typeEffectivenessCalculator(Type type) {
     BigDecimal bug = new BigDecimal("1.0"),
             dark = new BigDecimal("1.0"),
@@ -185,10 +314,13 @@ public class FetchBasedOnTypes {
             rock = new BigDecimal("1.0"),
             steel = new BigDecimal("1.0"),
             water = new BigDecimal("1.0");
-
-    for (int i = 0; i < typesSuperEffective.size(); i++) {
-      BigDecimal damage = damageSuperEffective.get(i);
-      switch (typesSuperEffective.get(i).toString()) {
+    
+    // for (int i = 0; i < typesSuperEffective.size(); i++) {
+    // BigDecimal damage = damageSuperEffective.get(i);
+    // switch (typesSuperEffective.get(i).toString()) {
+    for (int i = 0; i < allEffectiveTypesFinal.size(); i++) {
+      BigDecimal damage = allEffectiveDamagesFinal.get(i);
+      switch (allEffectiveTypesFinal.get(i).toString()) {
         case "POKEMON_TYPE_BUG":
           bug = damage;
           break;
