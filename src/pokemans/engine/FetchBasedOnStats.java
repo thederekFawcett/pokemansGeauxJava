@@ -34,22 +34,33 @@ public class FetchBasedOnStats {
     
     // sort by descending max cp
     userPokes.sort(new SortByCP());
-    if (userPokes.size() <= 20) {
+    if (userPokes.size() <= 24) {
       return userPokes;
     } else {
-      return userPokes.subList(0, 20);
+      return userPokes.subList(0, 24);
     }
   }
   
   public static List<UserPokemon> createUserListSortedByMaxCPTimesDamageEffectiveness(
           List<UserPokemon> userPokes) {
     // sort by descending max cp
-    userPokes.sort(new SortByUserCPDamageTotal());
+    userPokes.sort(new SortByUserCPTDamage());
     
-    if (userPokes.size() <= 20) {
+    if (userPokes.size() <= 24) {
       return userPokes;
     } else {
-      return userPokes.subList(0, 20);
+      return userPokes.subList(0, 24);
+    }
+  }
+  
+  public static List<UserPokemon> createUserListSortedByMaxCPTDAndMoveDPE(List<UserPokemon> userPokes) {
+    // sort by descending value
+    userPokes.sort(new SortByUserCPTDamageTMoveDPE());
+    
+    if (userPokes.size() <= 24) {
+      return userPokes;
+    } else {
+      return userPokes.subList(0, 24);
     }
   }
   
@@ -71,8 +82,8 @@ public class FetchBasedOnStats {
 
     // sort by descending max combined stats
     pokeList.sort(new SortByCombinedStats());
-
-    return pokeList.subList(0, 20);
+  
+    return pokeList.subList(0, 24);
   }
 
   static List<Pokedex> createListSortedByMaxCP() {
@@ -83,8 +94,8 @@ public class FetchBasedOnStats {
 
     // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
-
-    return trimmedPokeList.subList(0, 20);
+  
+    return trimmedPokeList.subList(0, 24);
   }
   
   public static List<Pokedex> createListSortedByMaxCPTimesDamageEffectiveness() {
@@ -95,8 +106,8 @@ public class FetchBasedOnStats {
     
     // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
-    
-    return trimmedPokeList.subList(0, 20);
+  
+    return trimmedPokeList.subList(0, 24);
   }
 
   public static List<Pokedex> createListSortedByMaxCPTDAndMoveDPE() {
@@ -108,7 +119,7 @@ public class FetchBasedOnStats {
     // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
   
-    return trimmedPokeList.subList(0, 20);
+    return trimmedPokeList.subList(0, 24);
   }
   
   public static int combineStats(Pokedex poke) {

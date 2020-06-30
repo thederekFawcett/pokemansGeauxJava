@@ -14,22 +14,23 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Maths {
   private static final MathContext mc = new MathContext(9);
-  
+
   /////////////////////////////////////////////////////////////////////////////////////
   // user poke maths below
-  
+
   public static BigDecimal calculateUserPokeCP(UserPokemon poke) {
-    
+
     BigDecimal attackBase = BigDecimal.valueOf(poke.getUserPokeAttackBase());
     BigDecimal defenseBase = BigDecimal.valueOf(poke.getUserPokeDefenseBase());
     BigDecimal staminaBase = BigDecimal.valueOf(poke.getUserPokeStaminaBase());
     BigDecimal attackIV = poke.getUserPokeAttackIV();
     BigDecimal defenseIV = poke.getUserPokeDefenseIV();
     BigDecimal staminaIV = poke.getUserPokeStaminaIV();
-    
+
     // @formatter:off
     BigDecimal cp =
             (((attackBase.add(attackIV))
@@ -41,7 +42,7 @@ public class Maths {
     // @formatter:on
     return cp;
   }
-  
+
   // calculate useful CP values
   public static BigDecimal calculateUserCPTimesDamage(UserPokemon poke) {
     if (poke.getUserPokeType().length == 1) {
@@ -53,6 +54,48 @@ public class Maths {
                       (FetchBasedOnTypes.typeEffectivenessCalculator(poke.getUserPokeType1()))
                               .max(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getUserPokeType2())));
     }
+  }
+  
+  // get values (value & move name) based on: calculate (max CP * type effectiveness) * moveDPE
+  public static Object[] calculateUserPokeHighestMoveValue(UserPokemon poke) {
+    BigDecimal pokeWithMoveValue = null, pokeUsefulnessValue;
+    Object[] values = new Object[2];
+    values[0] = new BigDecimal("0.0");
+    values[1] = null;
+    
+    List<MovesCinematic> userPokeMovesCinematic = new ArrayList<>(poke.getUserMovesCinematic());
+    
+    if (!userPokeMovesCinematic.isEmpty()) {
+      for (MovesCinematic move : userPokeMovesCinematic) {
+        for (Type type : poke.getUserPokeType()) {
+          if (move.getMoveType().equals(type)) {
+            // calculate with STAB
+            pokeUsefulnessValue =
+                    (poke.getUserPokeCP())
+                            .multiply(FetchBasedOnTypes.typeEffectivenessCalculator(type));
+            pokeWithMoveValue =
+                    pokeUsefulnessValue
+                            .multiply(
+                                    (BigDecimal.valueOf(move.getPvpDPE())
+                                            .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
+                            .round(mc);
+          } else {
+            // calculate with no STAB
+            pokeUsefulnessValue =
+                    (poke.getUserPokeCP())
+                            .multiply(FetchBasedOnTypes.typeEffectivenessCalculator(type));
+            pokeWithMoveValue =
+                    pokeUsefulnessValue.multiply(BigDecimal.valueOf(move.getPvpDPE())).round(mc);
+          }
+          assert pokeWithMoveValue != null;
+          if (pokeWithMoveValue.compareTo((BigDecimal) values[0]) > 0) {
+            values[0] = pokeWithMoveValue;
+            values[1] = move.getMoveName();
+          }
+        }
+      }
+    }
+    return values;
   }
   
   /////////////////////////////////////////////////////////////////////////////////////
@@ -96,89 +139,28 @@ public class Maths {
                               .max(FetchBasedOnTypes.typeEffectivenessCalculator(poke.getType2())));
     }
   }
-
-  // calculate useful CP values
+  
+  // calculate pokedex max CP * type effectiveness for one Type
   public static BigDecimal calculateCPTimesDamageOneType(Pokedex poke, Type type) {
     BigDecimal damage = FetchBasedOnTypes.typeEffectivenessCalculator(type);
     return calculateMaxCP(poke).multiply(damage);
   }
-
-  // calculate (max CP * type effectiveness) * moveDPE
-  public static BigDecimal calculateCPTDAndMove(Pokedex poke) {
-
-    BigDecimal pokeWithMoveValue = null;
-    BigDecimal highestValue = new BigDecimal("0");
-
-    ArrayList<MovesCinematic> thisPokesMovesCinematic = new ArrayList<>();
-    Collections.addAll(thisPokesMovesCinematic, poke.getAllCinematicMoves());
-
-    for (MovesCinematic move : thisPokesMovesCinematic) {
-      if (poke.getType().length == 1) {
-        if (move.getMoveType().equals(poke.getType1())) {
-          // calculate with STAB
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue
-                          .multiply(
-                                  (BigDecimal.valueOf(move.getPvpDPE())
-                                          .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
-                          .round(mc);
-        } else {
-          // calculate with no STAB
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue.multiply(BigDecimal.valueOf(move.getPvpDPE())).round(mc);
-        }
-
-      } else {
-        if (move.getMoveType().equals(poke.getType1())) {
-          // calculate with STAB
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue
-                          .multiply(
-                                  (BigDecimal.valueOf(move.getPvpDPE())
-                                          .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
-                          .round(mc);
-        } else if (move.getMoveType().equals(poke.getType2())) {
-          // calculate with STAB
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType2());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue
-                          .multiply(
-                                  (BigDecimal.valueOf(move.getPvpDPE())
-                                          .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
-                          .round(mc);
-        } else {
-          // calculate with no STAB
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue.multiply(BigDecimal.valueOf(move.getPvpDPE())).round(mc);
-        }
-      }
-
-      assert pokeWithMoveValue != null;
-      if (pokeWithMoveValue.compareTo(highestValue) > 0) {
-        highestValue = pokeWithMoveValue;
-      }
-    }
-
-    return highestValue;
-  }
-
+  
   // get moveName based on: calculate (max CP * type effectiveness) * moveDPE
-  public static String getHighestValueMoveName(Pokedex poke) {
-    BigDecimal pokeWithMoveValue = null;
-    BigDecimal highestValue = new BigDecimal("0");
-    String moveName = null;
-
+  public static Object[] getHighestMoveValues(Pokedex poke) {
+    BigDecimal pokeWithMoveValue = null, pokeUsefulnessValue;
+    Object[] values = new Object[2];
+    values[0] = new BigDecimal("0.0");
+    values[1] = null;
+    
     ArrayList<MovesCinematic> thisPokesMovesCinematic = new ArrayList<>();
     Collections.addAll(thisPokesMovesCinematic, poke.getAllCinematicMoves());
-
+    
     for (MovesCinematic move : thisPokesMovesCinematic) {
-      if (poke.getType().length == 1) {
-        if (move.getMoveType().equals(poke.getType1())) {
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
+      for (Type type : poke.getType()) {
+        if (move.getMoveType().equals(type)) {
+          // calculate with STAB
+          pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, type);
           pokeWithMoveValue =
                   pokeUsefulnessValue
                           .multiply(
@@ -186,42 +168,17 @@ public class Maths {
                                           .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
                           .round(mc);
         } else {
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
+          pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, type);
           pokeWithMoveValue =
                   pokeUsefulnessValue.multiply(BigDecimal.valueOf(move.getPvpDPE())).round(mc);
         }
-
-      } else {
-        if (move.getMoveType().equals(poke.getType1())) {
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue
-                          .multiply(
-                                  (BigDecimal.valueOf(move.getPvpDPE())
-                                          .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
-                          .round(mc);
-        } else if (move.getMoveType().equals(poke.getType2())) {
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType2());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue
-                          .multiply(
-                                  (BigDecimal.valueOf(move.getPvpDPE())
-                                          .multiply(BattleMultipliers.sameTypeAttackBonusMultiplier)))
-                          .round(mc);
-        } else {
-          BigDecimal pokeUsefulnessValue = calculateCPTimesDamageOneType(poke, poke.getType1());
-          pokeWithMoveValue =
-                  pokeUsefulnessValue.multiply(BigDecimal.valueOf(move.getPvpDPE())).round(mc);
+        assert pokeWithMoveValue != null;
+        if (pokeWithMoveValue.compareTo((BigDecimal) values[0]) > 0) {
+          values[0] = pokeWithMoveValue;
+          values[1] = move.getMoveName();
         }
-      }
-
-      assert pokeWithMoveValue != null;
-      if (pokeWithMoveValue.compareTo(highestValue) > 0) {
-        highestValue = pokeWithMoveValue;
-        moveName = move.getMoveName();
       }
     }
-
-    return moveName;
+    return values;
   }
 }

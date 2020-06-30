@@ -7,6 +7,7 @@ package pokemans.engine;
 import pokemans.core.Pokedex;
 import pokemans.user.UserPokemon;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -20,11 +21,21 @@ class SortByCP implements Comparator<UserPokemon> {
 }
 
 // sort by max CP times type effectiveness
-class SortByUserCPDamageTotal implements Comparator<UserPokemon> {
+class SortByUserCPTDamage implements Comparator<UserPokemon> {
   public int compare(UserPokemon a, UserPokemon b) {
     return (Maths.calculateUserCPTimesDamage(b))
             .subtract(Maths.calculateUserCPTimesDamage(a))
             .intValue();
+  }
+}
+
+// sort by max CP times type effectiveness
+class SortByUserCPTDamageTMoveDPE implements Comparator<UserPokemon> {
+  public int compare(UserPokemon a, UserPokemon b) {
+    Object[] valuesA = Maths.calculateUserPokeHighestMoveValue(a);
+    Object[] valuesB = Maths.calculateUserPokeHighestMoveValue(b);
+    
+    return (((BigDecimal) valuesB[0]).subtract((BigDecimal) valuesA[0])).intValue();
   }
 }
 
@@ -57,6 +68,9 @@ class SortByMaxCPDamageTotal implements Comparator<Pokedex> {
 // sort by (max CP * type effectiveness) * move DPE
 class SortByCPDTAndMoveDPE implements Comparator<Pokedex> {
   public int compare(Pokedex a, Pokedex b) {
-    return (Maths.calculateCPTDAndMove(b)).subtract(Maths.calculateCPTDAndMove(a)).intValue();
+    Object[] valuesA = Maths.getHighestMoveValues(a);
+    Object[] valuesB = Maths.getHighestMoveValues(b);
+  
+    return (((BigDecimal) valuesB[0]).subtract((BigDecimal) valuesA[0])).intValue();
   }
 }
