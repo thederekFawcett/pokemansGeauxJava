@@ -4,6 +4,7 @@
 
 import pokemans.engine.TypeInteractive;
 import pokemans.user.UserInfo;
+import pokemans.utilities.read.UtilityUpdateFromJSON;
 
 public class the_derek {
   
@@ -12,7 +13,7 @@ public class the_derek {
     System.out.println("\n\t*the_derek wuz here*\n");
     
     // update program files from PoGo Game Master
-      //UtilityUpdateFromJSON.main(args);
+      UtilityUpdateFromJSON.main(args);
     
     // read user CSV
     UserInfo.importUserCSV();
