@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 interface CombatMultipliers {
     
+    BigDecimal blockedEffectiveFlyoutDurationTurns = new BigDecimal("5.0");
     BigDecimal changePokemonDurationSeconds = new BigDecimal("12.0");
     BigDecimal chargeAttackBonusMultiplier = new BigDecimal("1.3");
     BigDecimal chargeScoreBase = new BigDecimal("0.25");
@@ -23,12 +24,15 @@ interface CombatMultipliers {
     BigDecimal minigameBonusVariableMultiplier = new BigDecimal("1.0");
     BigDecimal minigameDurationSeconds = new BigDecimal("7.0");
     BigDecimal minigameSubmitScoreDurationSeconds = new BigDecimal("10.0");
+    BigDecimal normalEffectiveFlyoutDurationTurns = new BigDecimal("5.0");
+    BigDecimal notVeryEffectiveFlyoutDurationTurns = new BigDecimal("5.0");
     BigDecimal purifiedPokemonAttackMultiplierVsShadow = new BigDecimal("1.0");
     BigDecimal quickSwapCooldownDurationSeconds = new BigDecimal("60.0");
     BigDecimal roundDurationSeconds = new BigDecimal("270.0");
     BigDecimal sameTypeAttackBonusMultiplier = new BigDecimal("1.2");
     BigDecimal shadowPokemonAttackBonusMultiplier = new BigDecimal("1.2");
     BigDecimal shadowPokemonDefenseBonusMultiplier = new BigDecimal("0.8333333");
+    BigDecimal superEffectiveFlyoutDurationTurns = new BigDecimal("5.0");
     BigDecimal turnDurationSeconds = new BigDecimal("0.5");
     BigDecimal[] attackBuffMultiplier = {new BigDecimal("0.5"), new BigDecimal("0.5714286"), new BigDecimal("0.6666667"), new BigDecimal("0.8"), new BigDecimal("1.0"), new BigDecimal("1.25"), new BigDecimal("1.5"), new BigDecimal("1.75"), new BigDecimal("2.0")};
     BigDecimal[] defenseBuffMultiplier = {new BigDecimal("0.5"), new BigDecimal("0.5714286"), new BigDecimal("0.6666667"), new BigDecimal("0.8"), new BigDecimal("1.0"), new BigDecimal("1.25"), new BigDecimal("1.5"), new BigDecimal("1.75"), new BigDecimal("2.0")};

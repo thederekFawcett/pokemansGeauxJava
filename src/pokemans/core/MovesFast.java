@@ -94,6 +94,12 @@ public enum MovesFast {
 	THUNDER_FANG_FAST(FastMove.THUNDER_FANG_FAST),
 	ICE_FANG_FAST(FastMove.ICE_FANG_FAST);
 	
+	private final String MOVENUM, MOVENAME;
+	private final Type MOVETYPE;
+	private final Double PVEPOWER, PVPPOWER, PVPDPT, PVPEPT, PVPDPTEPT;
+	private final Byte PVEENERGY, PVPENERGY, PVPTURNS;
+	private final int PVEDURATIONMS, PVEDAMAGEWINDOWSTARTMS, PVEEDAMAGEWINDOWENDMS;
+	
 	MovesFast(FastMove fm) {
 		MOVENUM = fm.MOVENUM;
 		MOVENAME = fm.MOVENAME;
@@ -110,17 +116,7 @@ public enum MovesFast {
 		PVPEPT = fm.PVPEPT;
 		PVPDPTEPT = fm.PVPDPTEPT;
 	}
-	
-	private final String MOVENUM, MOVENAME;
-	private final Type MOVETYPE;
-	private final Double PVEPOWER, PVPPOWER, PVPDPT, PVPEPT, PVPDPTEPT;
-	private final Byte PVEENERGY, PVPENERGY, PVPTURNS;
-	private final int PVEDURATIONMS, PVEDAMAGEWINDOWSTARTMS, PVEEDAMAGEWINDOWENDMS;
-	
-	public Double getPvpDPT() {
-		return PVPDPT;
-	}
-	
+
 	public String getMoveNum() {
 		return MOVENUM;
 	}
@@ -132,29 +128,41 @@ public enum MovesFast {
 	public Type getMoveType() {
 		return MOVETYPE;
 	}
+	
 	public Double getPvePower() {
 		return PVEPOWER;
 	}
+	
 	public Byte getPveEnergy() {
 		return PVEENERGY;
 	}
+	
 	public int getPveDurationMs() {
 		return PVEDURATIONMS;
 	}
+	
 	public int getPveDamageWindowStartMs() {
 		return PVEDAMAGEWINDOWSTARTMS;
 	}
+	
 	public int getPveDamageWindowEndMs() {
 		return PVEEDAMAGEWINDOWENDMS;
 	}
+	
 	public Double getPvpPower() {
 		return PVPPOWER;
 	}
+	
 	public Byte getPvpEnergy() {
 		return PVPENERGY;
 	}
+	
 	public Byte getPvpTurns() {
 		return PVPTURNS;
+	}
+	
+	public Double getPvpDPT() {
+		return PVPDPT;
 	}
 	
 	private enum FastMove {

@@ -160,7 +160,8 @@ public enum MovesCinematic {
 	SACRED_SWORD(ChargeMove.SACRED_SWORD),
 	FLYING_PRESS(ChargeMove.FLYING_PRESS),
 	AURA_SPHERE(ChargeMove.AURA_SPHERE),
-	ROCK_WRECKER(ChargeMove.ROCK_WRECKER);
+	ROCK_WRECKER(ChargeMove.ROCK_WRECKER),
+	FLY(ChargeMove.FLY);
 	
 	private final String MOVENUM, MOVENAME;
 	private final Type MOVETYPE;
@@ -187,7 +188,7 @@ public enum MovesCinematic {
 		PVPBUFFTARGETATTACK = cm.PVPBUFFTARGETATTACK;
 		PVPBUFFTARGETDEFENSE = cm.PVPBUFFTARGETDEFENSE;
 	}
-	
+
 	public String getMoveNum() {
 		return MOVENUM;
 	}
@@ -406,7 +407,8 @@ public enum MovesCinematic {
 		SACRED_SWORD("330", "SACRED_SWORD", Type.POKEMON_TYPE_FIGHTING, 0.0, (byte) 0, 1300, 650, 1000, 60.0, (byte) -35, 1.71428571, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		FLYING_PRESS("331", "FLYING_PRESS", Type.POKEMON_TYPE_FIGHTING, 50.0, (byte) -33, 2000, 1700, 1900, 90.0, (byte) -40, 2.25, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		AURA_SPHERE("332", "AURA_SPHERE", Type.POKEMON_TYPE_FIGHTING, 200.0, (byte) -100, 4700, 1000, 2400, 100.0, (byte) -55, 1.81818181, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
-		ROCK_WRECKER("334", "ROCK_WRECKER", Type.POKEMON_TYPE_ROCK, 10.0, (byte) -33, 2000, 1000, 1800, 110.0, (byte) -50, 2.2, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0);
+		ROCK_WRECKER("334", "ROCK_WRECKER", Type.POKEMON_TYPE_ROCK, 10.0, (byte) -33, 2000, 1000, 1800, 110.0, (byte) -50, 2.2, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
+		FLY("341", "FLY", Type.POKEMON_TYPE_FLYING, 35.0, (byte) -33, 700, 100, 350, 80.0, (byte) -45, 1.77777777, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0);
 		
 		private final String MOVENUM, MOVENAME;
 		private final Type MOVETYPE;
