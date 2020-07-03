@@ -7,7 +7,7 @@
 package pokemans.core;
 
 public enum MovesCinematic {
-	
+
 	WRAP(ChargeMove.WRAP),
 	HYPER_BEAM(ChargeMove.HYPER_BEAM),
 	DARK_PULSE(ChargeMove.DARK_PULSE),
@@ -103,7 +103,6 @@ public enum MovesCinematic {
 	HYDRO_PUMP_BLASTOISE(ChargeMove.HYDRO_PUMP_BLASTOISE),
 	WRAP_GREEN(ChargeMove.WRAP_GREEN),
 	WRAP_PINK(ChargeMove.WRAP_PINK),
-	WATER_GUN_FAST_BLASTOISE(ChargeMove.WATER_GUN_FAST_BLASTOISE),
 	CLOSE_COMBAT(ChargeMove.CLOSE_COMBAT),
 	DYNAMIC_PUNCH(ChargeMove.DYNAMIC_PUNCH),
 	FOCUS_BLAST(ChargeMove.FOCUS_BLAST),
@@ -350,7 +349,6 @@ public enum MovesCinematic {
 		HYDRO_PUMP_BLASTOISE("135", "HYDRO_PUMP_BLASTOISE", Type.POKEMON_TYPE_WATER, 90.0, (byte) -100, 4500, 2200, 4300, 90.0, (byte) -80, 1.125, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		WRAP_GREEN("136", "WRAP_GREEN", Type.POKEMON_TYPE_NORMAL, 25.0, (byte) -33, 2900, 2050, 2700, 25.0, (byte) -45, 0.55555555, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		WRAP_PINK("137", "WRAP_PINK", Type.POKEMON_TYPE_NORMAL, 25.0, (byte) -33, 2900, 2050, 2700, 25.0, (byte) -45, 0.55555555, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
-		WATER_GUN_FAST_BLASTOISE("232", "WATER_GUN_FAST_BLASTOISE", Type.POKEMON_TYPE_WATER, 10.0, (byte) 6, 1000, 300, 500, 6.0, (byte) 4, -1.5, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		CLOSE_COMBAT("245", "CLOSE_COMBAT", Type.POKEMON_TYPE_FIGHTING, 100.0, (byte) -100, 2300, 1000, 2300, 100.0, (byte) -45, 2.22222222, 1.0, (byte) 0, (byte) -2, (byte) 0, (byte) 0),
 		DYNAMIC_PUNCH("246", "DYNAMIC_PUNCH", Type.POKEMON_TYPE_FIGHTING, 90.0, (byte) -50, 2700, 1200, 2700, 90.0, (byte) -50, 1.8, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),
 		FOCUS_BLAST("247", "FOCUS_BLAST", Type.POKEMON_TYPE_FIGHTING, 140.0, (byte) -100, 3500, 3000, 3500, 150.0, (byte) -75, 2.0, 0.0, (byte) 0, (byte) 0, (byte) 0, (byte) 0),

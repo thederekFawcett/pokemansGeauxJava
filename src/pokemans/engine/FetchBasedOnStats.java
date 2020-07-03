@@ -7,10 +7,8 @@ package pokemans.engine;
 import pokemans.core.Pokedex;
 import pokemans.user.UserPokemon;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class FetchBasedOnStats {
   
@@ -52,27 +50,46 @@ public class FetchBasedOnStats {
       return userPokes.subList(0, 24);
     }
   }
-  
-  public static List<UserPokemon> createUserListSortedByMaxCPTDAndMoveDPE(List<UserPokemon> userPokes) {
-    // sort by descending value
-    userPokes.sort(new SortByUserCPTDamageTMoveDPE());
     
-    if (userPokes.size() <= 24) {
-      return userPokes;
-    } else {
-      return userPokes.subList(0, 24);
+    public static List<UserPokemon> createUserListSortedByMaxCPTDAndMoveDPE(List<UserPokemon> userPokes) {
+        // sort by descending value
+        userPokes.sort(new SortByUserCPTDamageTMoveDPE());
+        
+        if (userPokes.size() <= 24) {
+            return userPokes;
+        } else {
+            return userPokes.subList(0, 24);
+        }
     }
-  }
-  
-  /////////////////////////////////////////////////////////////////////////////////////
-  // pokedex listing below
-  
-  static void createListOfSuperEffectivePokes() {
-    // iterate through each poke
-    for (Pokedex poke : Pokedex.values()) {
-      if (!Collections.disjoint(
-              FetchBasedOnTypes.typesSuperEffective, Arrays.asList(poke.getType()))) {
-        pokesSuperEffective.add(poke);
+    
+    // creates list sorted by very large numerical value
+    public static List<UserPokemon> createUserListSortedByTotalValues(List<UserPokemon> userPokes) {
+        HashMap<BigDecimal, UserPokemon> hello = new HashMap<BigDecimal, UserPokemon>();
+        ValueComparator bvc = new ValueComparator(hello);
+        TreeMap<BigDecimal, UserPokemon> sorted = new TreeMap<BigDecimal, UserPokemon>(bvc);
+        for (UserPokemon poke : userPokes) {
+            Object[] values = Maths.calcHighestValueTimesStatProducts(poke);
+            BigDecimal pokeValue = (BigDecimal) values[0];
+            hello.put(pokeValue, poke);
+        }
+        sorted.putAll(hello);
+        List<UserPokemon> sortedList = new ArrayList<>(sorted.values());
+        if (sortedList.size() <= 24) {
+            return sortedList;
+        } else {
+            return sortedList.subList(0, 24);
+        }
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////
+    // pokedex listing below
+    
+    static void createListOfSuperEffectivePokes() {
+        // iterate through each poke
+        for (Pokedex poke : Pokedex.values()) {
+            if (!Collections.disjoint(
+                    FetchBasedOnTypes.typesSuperEffective, Arrays.asList(poke.getType()))) {
+                pokesSuperEffective.add(poke);
       }
     }
   }

@@ -10,93 +10,93 @@ import java.math.BigDecimal;
 interface CPMultiplier {
     
     BigDecimal[] levels = {
-            new BigDecimal("0.094"),    // 1
-            new BigDecimal("0.00782069"),    // 1.5
-            new BigDecimal("0.16639787"),    // 2
-            new BigDecimal("0.01794871"),    // 2.5
-            new BigDecimal("0.21573247"),    // 3
-            new BigDecimal("0.02758355"),    // 3.5
-            new BigDecimal("0.25572005"),    // 4
-            new BigDecimal("0.03711135"),    // 4.5
-            new BigDecimal("0.29024988"),    // 5
-            new BigDecimal("0.04659781"),    // 5.5
-            new BigDecimal("0.3210876"),    // 6
-            new BigDecimal("0.05606393"),    // 6.5
-            new BigDecimal("0.34921268"),    // 7
-            new BigDecimal("0.06551851"),    // 7.5
-            new BigDecimal("0.3752356"),    // 8
-            new BigDecimal("0.07496593"),    // 8.5
-            new BigDecimal("0.39956728"),    // 9
-            new BigDecimal("0.08440858"),    // 9.5
-            new BigDecimal("0.4225"),    // 10
-            new BigDecimal("0.09360646"),    // 10.5
-            new BigDecimal("0.44310755"),    // 11
-            new BigDecimal("0.10253473"),    // 11.5
-            new BigDecimal("0.4627984"),    // 12
-            new BigDecimal("0.11146151"),    // 12.5
-            new BigDecimal("0.48168495"),    // 13
-            new BigDecimal("0.12038714"),    // 13.5
-            new BigDecimal("0.49985844"),    // 14
-            new BigDecimal("0.12931186"),    // 14.5
-            new BigDecimal("0.51739395"),    // 15
-            new BigDecimal("0.13823584"),    // 15.5
-            new BigDecimal("0.5343543"),    // 16
-            new BigDecimal("0.14715922"),    // 16.5
-            new BigDecimal("0.5507927"),    // 17
-            new BigDecimal("0.15608212"),    // 17.5
-            new BigDecimal("0.5667545"),    // 18
-            new BigDecimal("0.16500459"),    // 18.5
-            new BigDecimal("0.5822789"),    // 19
-            new BigDecimal("0.17392670"),    // 19.5
-            new BigDecimal("0.5974"),    // 20
-            new BigDecimal("0.18285138"),    // 20.5
-            new BigDecimal("0.6121573"),    // 21
-            new BigDecimal("0.19177881"),    // 21.5
-            new BigDecimal("0.6265671"),    // 22
-            new BigDecimal("0.20070603"),    // 22.5
-            new BigDecimal("0.64065295"),    // 23
-            new BigDecimal("0.20963305"),    // 23.5
-            new BigDecimal("0.65443563"),    // 24
-            new BigDecimal("0.21855990"),    // 24.5
-            new BigDecimal("0.667934"),    // 25
-            new BigDecimal("0.22748659"),    // 25.5
-            new BigDecimal("0.6811649"),    // 26
-            new BigDecimal("0.23641314"),    // 26.5
-            new BigDecimal("0.69414365"),    // 27
-            new BigDecimal("0.24533958"),    // 27.5
-            new BigDecimal("0.7068842"),    // 28
-            new BigDecimal("0.25426592"),    // 28.5
-            new BigDecimal("0.7193991"),    // 29
-            new BigDecimal("0.26319216"),    // 29.5
-            new BigDecimal("0.7317"),    // 30
-            new BigDecimal("0.26991297"),    // 30.5
-            new BigDecimal("0.7377695"),    // 31
-            new BigDecimal("0.27437257"),    // 31.5
-            new BigDecimal("0.74378943"),    // 32
-            new BigDecimal("0.27883216"),    // 32.5
-            new BigDecimal("0.74976104"),    // 33
-            new BigDecimal("0.28329177"),    // 33.5
-            new BigDecimal("0.7556855"),    // 34
-            new BigDecimal("0.28775137"),    // 34.5
-            new BigDecimal("0.76156384"),    // 35
-            new BigDecimal("0.29221096"),    // 35.5
-            new BigDecimal("0.76739717"),    // 36
-            new BigDecimal("0.29667056"),    // 36.5
-            new BigDecimal("0.7731865"),    // 37
-            new BigDecimal("0.30113014"),    // 37.5
-            new BigDecimal("0.77893275"),    // 38
-            new BigDecimal("0.30558972"),    // 38.5
-            new BigDecimal("0.784637"),    // 39
-            new BigDecimal("0.31004931"),    // 39.5
-            new BigDecimal("0.7903"),    // 40
-            new BigDecimal("0.31426279"),    // 40.5
-            new BigDecimal("0.7953"),    // 41
-            new BigDecimal("0.31823929"),    // 41.5
-            new BigDecimal("0.8003"),    // 42
-            new BigDecimal("0.32224079"),    // 42.5
-            new BigDecimal("0.8053"),    // 43
-            new BigDecimal("0.32626729"),    // 43.5
-            new BigDecimal("0.8103"),    // 44
-            new BigDecimal("0.33031879"),    // 44.5
-            new BigDecimal("0.8153")};    // 45
+            new BigDecimal("0.094"),    // index [0], level 1
+            new BigDecimal("0.13019893"),    // index [0], level 1.5
+            new BigDecimal("0.16639787"),    // index [2], level 2
+            new BigDecimal("0.19106517"),    // index [2], level 2.5
+            new BigDecimal("0.21573247"),    // index [4], level 3
+            new BigDecimal("0.23572626"),    // index [4], level 3.5
+            new BigDecimal("0.25572005"),    // index [6], level 4
+            new BigDecimal("0.27298496"),    // index [6], level 4.5
+            new BigDecimal("0.29024988"),    // index [8], level 5
+            new BigDecimal("0.30566874"),    // index [8], level 5.5
+            new BigDecimal("0.3210876"),    // index [10], level 6
+            new BigDecimal("0.33515014"),    // index [10], level 6.5
+            new BigDecimal("0.34921268"),    // index [12], level 7
+            new BigDecimal("0.36222414"),    // index [12], level 7.5
+            new BigDecimal("0.3752356"),    // index [14], level 8
+            new BigDecimal("0.38740144"),    // index [14], level 8.5
+            new BigDecimal("0.39956728"),    // index [16], level 9
+            new BigDecimal("0.41103364"),    // index [16], level 9.5
+            new BigDecimal("0.4225"),    // index [18], level 10
+            new BigDecimal("0.43280377"),    // index [18], level 10.5
+            new BigDecimal("0.44310755"),    // index [20], level 11
+            new BigDecimal("0.45295297"),    // index [20], level 11.5
+            new BigDecimal("0.4627984"),    // index [22], level 12
+            new BigDecimal("0.47224167"),    // index [22], level 12.5
+            new BigDecimal("0.48168495"),    // index [24], level 13
+            new BigDecimal("0.49077169"),    // index [24], level 13.5
+            new BigDecimal("0.49985844"),    // index [26], level 14
+            new BigDecimal("0.50862619"),    // index [26], level 14.5
+            new BigDecimal("0.51739395"),    // index [28], level 15
+            new BigDecimal("0.52587412"),    // index [28], level 15.5
+            new BigDecimal("0.5343543"),    // index [30], level 16
+            new BigDecimal("0.54257350"),    // index [30], level 16.5
+            new BigDecimal("0.5507927"),    // index [32], level 17
+            new BigDecimal("0.55877360"),    // index [32], level 17.5
+            new BigDecimal("0.5667545"),    // index [34], level 18
+            new BigDecimal("0.57451670"),    // index [34], level 18.5
+            new BigDecimal("0.5822789"),    // index [36], level 19
+            new BigDecimal("0.58983945"),    // index [36], level 19.5
+            new BigDecimal("0.5974"),    // index [38], level 20
+            new BigDecimal("0.60477865"),    // index [38], level 20.5
+            new BigDecimal("0.6121573"),    // index [40], level 21
+            new BigDecimal("0.61936220"),    // index [40], level 21.5
+            new BigDecimal("0.6265671"),    // index [42], level 22
+            new BigDecimal("0.63361002"),    // index [42], level 22.5
+            new BigDecimal("0.64065295"),    // index [44], level 23
+            new BigDecimal("0.64754429"),    // index [44], level 23.5
+            new BigDecimal("0.65443563"),    // index [46], level 24
+            new BigDecimal("0.66118481"),    // index [46], level 24.5
+            new BigDecimal("0.667934"),    // index [48], level 25
+            new BigDecimal("0.67454945"),    // index [48], level 25.5
+            new BigDecimal("0.6811649"),    // index [50], level 26
+            new BigDecimal("0.68765427"),    // index [50], level 26.5
+            new BigDecimal("0.69414365"),    // index [52], level 27
+            new BigDecimal("0.70051392"),    // index [52], level 27.5
+            new BigDecimal("0.7068842"),    // index [54], level 28
+            new BigDecimal("0.71314165"),    // index [54], level 28.5
+            new BigDecimal("0.7193991"),    // index [56], level 29
+            new BigDecimal("0.72554955"),    // index [56], level 29.5
+            new BigDecimal("0.7317"),    // index [58], level 30
+            new BigDecimal("0.73473475"),    // index [58], level 30.5
+            new BigDecimal("0.7377695"),    // index [60], level 31
+            new BigDecimal("0.74077946"),    // index [60], level 31.5
+            new BigDecimal("0.74378943"),    // index [62], level 32
+            new BigDecimal("0.74677523"),    // index [62], level 32.5
+            new BigDecimal("0.74976104"),    // index [64], level 33
+            new BigDecimal("0.75272327"),    // index [64], level 33.5
+            new BigDecimal("0.7556855"),    // index [66], level 34
+            new BigDecimal("0.75862467"),    // index [66], level 34.5
+            new BigDecimal("0.76156384"),    // index [68], level 35
+            new BigDecimal("0.76448050"),    // index [68], level 35.5
+            new BigDecimal("0.76739717"),    // index [70], level 36
+            new BigDecimal("0.77029183"),    // index [70], level 36.5
+            new BigDecimal("0.7731865"),    // index [72], level 37
+            new BigDecimal("0.77605962"),    // index [72], level 37.5
+            new BigDecimal("0.77893275"),    // index [74], level 38
+            new BigDecimal("0.78178487"),    // index [74], level 38.5
+            new BigDecimal("0.784637"),    // index [76], level 39
+            new BigDecimal("0.78746850"),    // index [76], level 39.5
+            new BigDecimal("0.7903"),    // index [78], level 40
+            new BigDecimal("0.79280000"),    // index [78], level 40.5
+            new BigDecimal("0.7953"),    // index [80], level 41
+            new BigDecimal("0.79780000"),    // index [80], level 41.5
+            new BigDecimal("0.8003"),    // index [82], level 42
+            new BigDecimal("0.80280000"),    // index [82], level 42.5
+            new BigDecimal("0.8053"),    // index [84], level 43
+            new BigDecimal("0.80780000"),    // index [84], level 43.5
+            new BigDecimal("0.8103"),    // index [86], level 44
+            new BigDecimal("0.81280000"),    // index [86], level 44.5
+            new BigDecimal("0.8153")};    // index [88], level 45
 }

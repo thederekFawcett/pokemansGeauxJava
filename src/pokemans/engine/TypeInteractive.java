@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TypeInteractive {
-    private static final List<UserPokemon> userPokes = new ArrayList<>();
+    private static final List<UserPokemon> userPokes = new ArrayList<>(), topUserPokes = new ArrayList<>();
     private static Scanner in;
     private static boolean isPoke = false;
     private static final List<String> inputtedPokeNames = new ArrayList<>();
@@ -43,16 +43,18 @@ public class TypeInteractive {
         
         //in = new Scanner(System.in);
         //String userInput = in.nextLine().toUpperCase();
-    
-    
-        String userInput = "A";
+        
+        
+        String userInput = "T";
         
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
         
         FetchBasedOnStats.createListOfSuperEffectivePokes();
         //FetchBasedOnStats.createListOfSuperEffectiveUserPokes(userPokes);
-    
+        
+        topUserPokes.addAll(FetchBasedOnStats.createUserListSortedByTotalValues(userPokes));
+        
         printToUseAgainstMessage();
         
         boolean quitLoop = false;
@@ -60,7 +62,7 @@ public class TypeInteractive {
         switch (userInput) {
             case "X" -> System.exit(0);
             case "T" -> {
-                displayUsefulTypes();
+                //displayUsefulTypes();
                 quitLoop = true;
             }
             case "P" -> {
@@ -78,7 +80,8 @@ public class TypeInteractive {
                 //displayUsefulPokesByMaxCP();
                 //displayUsefulPokesByCpTimesDamage();
                 //displayPokesByCPTDAndMove();
-                displayUserPokesByCPTDAndMove();
+                //displayUserPokesByCPTDAndMove();
+                displayUserPokesByTotalValues();
                 quitLoop = true;
             }
             default -> {
@@ -87,7 +90,8 @@ public class TypeInteractive {
                 quitLoop = false;
             }
         }
-    
+        
+        BattlleCalculations.calculateUserAttackersVsOpponents(topUserPokes.get(0), inputtedPokeNames);
     
         // } while (!quitLoop);
     
@@ -112,7 +116,6 @@ public class TypeInteractive {
         /////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////
         
-        //String userInput1 = "GIRATINA_ORIGIN";
         userInputOpponents.add("CLEFABLE");
         userInputOpponents.add("GIRATINA_ORIGIN");
         userInputOpponents.add("CATERPIE");
@@ -220,12 +223,27 @@ public class TypeInteractive {
     
     // ranked by CP * type effectiveness * best charge move DPE
     private static void displayUserPokesByCPTDAndMove() {
-        System.out.println("\n\n\tTop 20 pokes sorted by:\n(CP * type effectiveness * best charge move DPE):\n");
-        
+        System.out.println("\n\n\tTop 24 pokes sorted by:\n(CP * type effectiveness * best charge move DPE):\n");
+    
         System.out.println(String.format("%16s %5s %14s %14s %13s", "Name", "CP", "Charge Move", "Calc Value", "Nick Name"));
         for (UserPokemon poke : FetchBasedOnStats.createUserListSortedByMaxCPTDAndMoveDPE(userPokes)) {
             Object[] values = Maths.calculateUserPokeHighestMoveValue(poke);
             System.out.println(String.format("%16s %5s %14s %14s %13s", poke.getUserPokeName(), poke.getUserPokeCP(), values[1],
+                    values[0], poke.getUserPokeNickName()));
+        }
+    }
+    
+    // ranked by CP * type effectiveness * best charge move DPE * fastMove DPT*EPT
+    private static void displayUserPokesByTotalValues() {
+        
+        
+        System.out.println("\n\n\tTop 24 pokes sorted by:\n(CP * statProduct * effectiveness * best chargeMove DPE * (fastMove DPT*EPT)):\n");
+        
+        System.out.println(String.format("%15s %5s %14s %16s %13s", "Name", "CP", "Charge Move", "Calc Value", "Nick Name"));
+        for (UserPokemon poke : topUserPokes) {
+            Object[] values = Maths.calcHighestValueTimesStatProducts(poke);
+            
+            System.out.println(String.format("%15s %5s %14s %16s %13s", poke.getUserPokeName(), poke.getUserPokeCP(), values[1],
                     values[0], poke.getUserPokeNickName()));
         }
     }

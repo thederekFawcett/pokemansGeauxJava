@@ -17,22 +17,23 @@ public class UserPokemon {
 
   // info from CSV
   private final String userPokeDexNum;
-  private final String userPokeName;
-  private final String userPokeNickName;
-  private final BigDecimal userPokeLevel;
-  private final BigDecimal userPokeCP;
+    private final String userPokeName;
+    private final String userPokeNickName;
+    private final BigDecimal userPokeLevel;
+    private final BigDecimal userPokeCP;
     private final BigDecimal userPokeHealth;
     private final BigDecimal userPokeAttackIV;
     private final BigDecimal userPokeDefenseIV;
     private final BigDecimal userPokeStaminaIV;
     private final MovesFast userPokeFastMove;
-    private final int userPokeAttackBase;
-    private final int userPokeDefenseBase;
-    private final int userPokeStaminaBase;
+    private final BigDecimal userPokeAttackBase;
+    private final BigDecimal userPokeDefenseBase;
+    private final BigDecimal userPokeStaminaBase;
+    private List<MovesCinematic> userPokeChargeMove = new ArrayList<>();
     private final Type[] userPokeType;
     // poke base-info
     private final Pokedex pokeBase;
-    private List<MovesCinematic> userPokeChargeMove = new ArrayList<>();
+    
     
     public UserPokemon(
             String userPokeDexNum,
@@ -61,9 +62,9 @@ public class UserPokemon {
         pokeBase = Pokedex.getPokeFromString(userPokeName);
         assert pokeBase != null;
         
-        this.userPokeAttackBase = pokeBase.getPokeAttack();
-        this.userPokeDefenseBase = pokeBase.getPokeDefense();
-        this.userPokeStaminaBase = pokeBase.getPokeStamina();
+        this.userPokeAttackBase = new BigDecimal(String.valueOf(pokeBase.getPokeAttack()));
+        this.userPokeDefenseBase = new BigDecimal(String.valueOf(pokeBase.getPokeDefense()));
+        this.userPokeStaminaBase = new BigDecimal(String.valueOf(pokeBase.getPokeStamina()));
         this.userPokeType = pokeBase.getType();
     }
     
@@ -119,17 +120,17 @@ public class UserPokemon {
         return pokeBase;
     }
     
-    public int getUserPokeAttackBase() {
+    public BigDecimal getUserPokeAttackBase() {
         return userPokeAttackBase;
     }
     
-    public int getUserPokeDefenseBase() {
-    return userPokeDefenseBase;
-  }
+    public BigDecimal getUserPokeDefenseBase() {
+        return userPokeDefenseBase;
+    }
     
-    public int getUserPokeStaminaBase() {
-    return userPokeStaminaBase;
-  }
+    public BigDecimal getUserPokeStaminaBase() {
+        return userPokeStaminaBase;
+    }
     
     public Type[] getUserPokeType() {
     return userPokeType;

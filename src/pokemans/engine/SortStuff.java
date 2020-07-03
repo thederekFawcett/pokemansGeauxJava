@@ -9,6 +9,7 @@ import pokemans.user.UserPokemon;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
+import java.util.Map;
 
 /////////////////////////////////////////////////////////////////////////////////////
 // user poke sorting below
@@ -36,6 +37,25 @@ class SortByUserCPTDamageTMoveDPE implements Comparator<UserPokemon> {
     Object[] valuesB = Maths.calculateUserPokeHighestMoveValue(b);
     
     return (((BigDecimal) valuesB[0]).subtract((BigDecimal) valuesA[0])).intValue();
+  }
+}
+
+class ValueComparator implements Comparator<BigDecimal> {
+  Map<BigDecimal, UserPokemon> base;
+  
+  public ValueComparator(Map<BigDecimal, UserPokemon> base) {
+    this.base = base;
+  }
+  
+  // Note: this comparator imposes orderings that are inconsistent with equals.
+  public int compare(BigDecimal a, BigDecimal b) {
+    Object[] valuesA = Maths.calcHighestValueTimesStatProducts(base.get(a));
+    Object[] valuesB = Maths.calcHighestValueTimesStatProducts(base.get(b));
+    if ((((BigDecimal) valuesB[0]).compareTo((BigDecimal) valuesA[0])) < 0) {
+      return -1;
+    } else {
+      return 1;
+    } // returning 0 would merge keys
   }
 }
 

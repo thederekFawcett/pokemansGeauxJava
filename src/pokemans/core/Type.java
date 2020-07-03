@@ -97,16 +97,16 @@ public enum Type {
          BigDecimal WATER, BigDecimal GRASS, BigDecimal ELECTRIC, BigDecimal PSYCHIC, BigDecimal ICE,
          BigDecimal DRAGON, BigDecimal DARK, BigDecimal FAIRY) {
         this.TYPENAME = TYPENAME;
-		this.NORMAL = NORMAL;
-		this.FIGHTING = FIGHTING;
-		this.FLYING = FLYING;
-		this.POISON = POISON;
-		this.GROUND = GROUND;
-		this.ROCK = ROCK;
-		this.BUG = BUG;
-		this.GHOST = GHOST;
-		this.STEEL = STEEL;
-		this.FIRE = FIRE;
+        this.NORMAL = NORMAL;
+        this.FIGHTING = FIGHTING;
+        this.FLYING = FLYING;
+        this.POISON = POISON;
+        this.GROUND = GROUND;
+        this.ROCK = ROCK;
+        this.BUG = BUG;
+        this.GHOST = GHOST;
+        this.STEEL = STEEL;
+        this.FIRE = FIRE;
 		this.WATER = WATER;
 		this.GRASS = GRASS;
 		this.ELECTRIC = ELECTRIC;
