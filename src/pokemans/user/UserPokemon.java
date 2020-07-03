@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserPokemon {
-
-  // info from CSV
-  private final String userPokeDexNum;
+    
+    // info from CSV
+    private final String userPokeDexNum;
     private final String userPokeName;
     private final String userPokeNickName;
     private final BigDecimal userPokeLevel;
@@ -29,11 +29,10 @@ public class UserPokemon {
     private final BigDecimal userPokeAttackBase;
     private final BigDecimal userPokeDefenseBase;
     private final BigDecimal userPokeStaminaBase;
-    private List<MovesCinematic> userPokeChargeMove = new ArrayList<>();
     private final Type[] userPokeType;
     // poke base-info
     private final Pokedex pokeBase;
-    
+    private List<MovesCinematic> userPokeChargeMove = new ArrayList<>();
     
     public UserPokemon(
             String userPokeDexNum,
@@ -69,32 +68,32 @@ public class UserPokemon {
     }
     
     public String getUserPokeDexNum() {
-    return userPokeDexNum;
-  }
+        return userPokeDexNum;
+    }
     
     public String getUserPokeName() {
-    return userPokeName;
-  }
+        return userPokeName;
+    }
     
     public String getUserPokeNickName() {
-    return userPokeNickName;
-  }
+        return userPokeNickName;
+    }
     
     public BigDecimal getUserPokeLevel() {
-    return userPokeLevel;
-  }
+        return userPokeLevel;
+    }
     
     public BigDecimal getUserPokeCP() {
-    return userPokeCP;
-  }
+        return userPokeCP;
+    }
     
     public BigDecimal getUserPokeHealth() {
-    return userPokeHealth;
-  }
+        return userPokeHealth;
+    }
     
     public BigDecimal getUserPokeAttackIV() {
-    return userPokeAttackIV;
-  }
+        return userPokeAttackIV;
+    }
     
     public BigDecimal getUserPokeDefenseIV() {
         return userPokeDefenseIV;
@@ -133,14 +132,14 @@ public class UserPokemon {
     }
     
     public Type[] getUserPokeType() {
-    return userPokeType;
-  }
+        return userPokeType;
+    }
     
     public Type getUserPokeType1() {
-    return userPokeType[0];
-  }
+        return userPokeType[0];
+    }
     
     public Type getUserPokeType2() {
-    return userPokeType[1];
-  }
+        return userPokeType[1];
+    }
 }

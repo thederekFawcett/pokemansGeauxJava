@@ -26,5 +26,4 @@ interface BattleMultipliers {
     BigDecimal shadowPokemonAttackBonusMultiplier = new BigDecimal("1.2");
     BigDecimal shadowPokemonDefenseBonusMultiplier = new BigDecimal("0.8333333");
     BigDecimal swapDurationMs = new BigDecimal("1000.0");
-    
 }

@@ -15,5 +15,4 @@ interface WeatherMultipliers {
     BigDecimal raidEncounterCpBaseLevelBonus = new BigDecimal("5.0");
     BigDecimal raidEncounterGuaranteedIndividualValues = new BigDecimal("10.0");
     BigDecimal stardustBonusMultiplier = new BigDecimal("1.25");
-    
 }

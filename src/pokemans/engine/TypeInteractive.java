@@ -16,9 +16,9 @@ import java.util.Scanner;
 
 public class TypeInteractive {
     private static final List<UserPokemon> userPokes = new ArrayList<>(), topUserPokes = new ArrayList<>();
+    private static final List<String> inputtedPokeNames = new ArrayList<>();
     private static Scanner in;
     private static boolean isPoke = false;
-    private static final List<String> inputtedPokeNames = new ArrayList<>();
     
     static public void main(String[] args) {
         String wantContinue;

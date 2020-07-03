@@ -117,27 +117,6 @@ public enum Type {
 		this.FAIRY = FAIRY;
 	}
 
-	public String getTYPENAME() { return TYPENAME; }
-	public BigDecimal getNORMAL() { return NORMAL; }
-	public BigDecimal getFIGHTING() { return FIGHTING; }
-	public BigDecimal getFLYING() { return FLYING; }
-	public BigDecimal getPOISON() { return POISON; }
-	public BigDecimal getGROUND() { return GROUND; }
-	public BigDecimal getROCK() { return ROCK; }
-	public BigDecimal getBUG() { return BUG; }
-	public BigDecimal getGHOST() { return GHOST; }
-	public BigDecimal getSTEEL() { return STEEL; }
-	public BigDecimal getFIRE() { return FIRE; }
-	public BigDecimal getWATER() { return WATER; }
-	public BigDecimal getGRASS() { return GRASS; }
-	public BigDecimal getELECTRIC() { return ELECTRIC; }
-	public BigDecimal getPSYCHIC() { return PSYCHIC; }
-	public BigDecimal getICE() { return ICE; }
-	public BigDecimal getDRAGON() { return DRAGON; }
-	public BigDecimal getDARK() { return DARK; }
-	public BigDecimal getFAIRY() { return FAIRY; }
-
-
 	public static Type stringToType(String inputType) {
 		Type thisType = null;
 		switch (inputType) {
@@ -159,9 +138,86 @@ public enum Type {
 			case "POKEMON_TYPE_ROCK" -> thisType = Type.POKEMON_TYPE_ROCK;
 			case "POKEMON_TYPE_STEEL" -> thisType = Type.POKEMON_TYPE_STEEL;
 			case "POKEMON_TYPE_WATER" -> thisType = Type.POKEMON_TYPE_WATER;
-			default -> { return thisType;
+			default -> {
+				return thisType;
 			}
 		}
 		return thisType;
+	}
+	
+	public String getTYPENAME() {
+		return TYPENAME;
+	}
+	
+	public BigDecimal getNORMAL() {
+		return NORMAL;
+	}
+	
+	public BigDecimal getFIGHTING() {
+		return FIGHTING;
+	}
+	
+	public BigDecimal getFLYING() {
+		return FLYING;
+	}
+	
+	public BigDecimal getPOISON() {
+		return POISON;
+	}
+	
+	public BigDecimal getGROUND() {
+		return GROUND;
+	}
+	
+	public BigDecimal getROCK() {
+		return ROCK;
+	}
+	
+	public BigDecimal getBUG() {
+		return BUG;
+	}
+	
+	public BigDecimal getGHOST() {
+		return GHOST;
+	}
+	
+	public BigDecimal getSTEEL() {
+		return STEEL;
+	}
+	
+	public BigDecimal getFIRE() {
+		return FIRE;
+	}
+	
+	public BigDecimal getWATER() {
+		return WATER;
+	}
+	
+	public BigDecimal getGRASS() {
+		return GRASS;
+	}
+	
+	public BigDecimal getELECTRIC() {
+		return ELECTRIC;
+	}
+	
+	public BigDecimal getPSYCHIC() {
+		return PSYCHIC;
+	}
+	
+	public BigDecimal getICE() {
+		return ICE;
+	}
+	
+	public BigDecimal getDRAGON() {
+		return DRAGON;
+	}
+	
+	public BigDecimal getDARK() {
+		return DARK;
+	}
+	
+	public BigDecimal getFAIRY() {
+		return FAIRY;
 	}
 }

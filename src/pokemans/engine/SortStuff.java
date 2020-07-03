@@ -35,7 +35,7 @@ class SortByUserCPTDamageTMoveDPE implements Comparator<UserPokemon> {
   public int compare(UserPokemon a, UserPokemon b) {
     Object[] valuesA = Maths.calculateUserPokeHighestMoveValue(a);
     Object[] valuesB = Maths.calculateUserPokeHighestMoveValue(b);
-    
+
     return (((BigDecimal) valuesB[0]).subtract((BigDecimal) valuesA[0])).intValue();
   }
 }

@@ -34,9 +34,28 @@ interface CombatMultipliers {
     BigDecimal shadowPokemonDefenseBonusMultiplier = new BigDecimal("0.8333333");
     BigDecimal superEffectiveFlyoutDurationTurns = new BigDecimal("5.0");
     BigDecimal turnDurationSeconds = new BigDecimal("0.5");
-    BigDecimal[] attackBuffMultiplier = {new BigDecimal("0.5"), new BigDecimal("0.5714286"), new BigDecimal("0.6666667"), new BigDecimal("0.8"), new BigDecimal("1.0"), new BigDecimal("1.25"), new BigDecimal("1.5"), new BigDecimal("1.75"), new BigDecimal("2.0")};
-    BigDecimal[] defenseBuffMultiplier = {new BigDecimal("0.5"), new BigDecimal("0.5714286"), new BigDecimal("0.6666667"), new BigDecimal("0.8"), new BigDecimal("1.0"), new BigDecimal("1.25"), new BigDecimal("1.5"), new BigDecimal("1.75"), new BigDecimal("2.0")};
+    BigDecimal[] attackBuffMultiplier = {
+            new BigDecimal("0.5"),
+            new BigDecimal("0.5714286"),
+            new BigDecimal("0.6666667"),
+            new BigDecimal("0.8"),
+            new BigDecimal("1.0"),
+            new BigDecimal("1.25"),
+            new BigDecimal("1.5"),
+            new BigDecimal("1.75"),
+            new BigDecimal("2.0")
+    };
+    BigDecimal[] defenseBuffMultiplier = {
+            new BigDecimal("0.5"),
+            new BigDecimal("0.5714286"),
+            new BigDecimal("0.6666667"),
+            new BigDecimal("0.8"),
+            new BigDecimal("1.0"),
+            new BigDecimal("1.25"),
+            new BigDecimal("1.5"),
+            new BigDecimal("1.75"),
+            new BigDecimal("2.0")
+    };
     BigDecimal maximumStatStage = new BigDecimal("4.0");
     BigDecimal minimumStatStage = new BigDecimal("-4.0");
-    
 }

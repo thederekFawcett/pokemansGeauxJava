@@ -7,7 +7,7 @@ import pokemans.user.UserInfo;
 import pokemans.utilities.read.UtilityUpdateFromJSONMiner;
 
 public class the_derek {
-  
+
   public static void main(String[] args) {
     
       System.out.println("\n\t*the_derek wuz here*\n");

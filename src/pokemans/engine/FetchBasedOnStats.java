@@ -11,26 +11,26 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class FetchBasedOnStats {
-  
+
   static final ArrayList<Pokedex> pokesSuperEffective = new ArrayList<>();
   static final List<UserPokemon> userBestPokes = new ArrayList<>();
-  
+
   /////////////////////////////////////////////////////////////////////////////////////
   // user poke listing below
-  
-  static void createListOfSuperEffectiveUserPokes(List<UserPokemon> pokes) {
+    
+    static void createListOfSuperEffectiveUserPokes(List<UserPokemon> pokes) {
     // iterate through each poke
     for (UserPokemon poke : pokes) {
-      if (!Collections.disjoint(
-              FetchBasedOnTypes.typesSuperEffective, Arrays.asList(poke.getUserPokeType()))) {
-        userBestPokes.add(poke);
-      }
+        if (!Collections.disjoint(
+                FetchBasedOnTypes.typesSuperEffective, Arrays.asList(poke.getUserPokeType()))) {
+            userBestPokes.add(poke);
+        }
     }
   }
-  
-  static List<UserPokemon> createListOfAllUserPokesSortedByCP(List<UserPokemon> userPokes) {
     
-    // sort by descending max cp
+    static List<UserPokemon> createListOfAllUserPokesSortedByCP(List<UserPokemon> userPokes) {
+        
+        // sort by descending max cp
     userPokes.sort(new SortByCP());
     if (userPokes.size() <= 24) {
       return userPokes;
@@ -38,20 +38,21 @@ public class FetchBasedOnStats {
       return userPokes.subList(0, 24);
     }
   }
-  
-  public static List<UserPokemon> createUserListSortedByMaxCPTimesDamageEffectiveness(
-          List<UserPokemon> userPokes) {
-    // sort by descending max cp
-    userPokes.sort(new SortByUserCPTDamage());
     
-    if (userPokes.size() <= 24) {
-      return userPokes;
-    } else {
-      return userPokes.subList(0, 24);
+    public static List<UserPokemon> createUserListSortedByMaxCPTimesDamageEffectiveness(
+            List<UserPokemon> userPokes) {
+        // sort by descending max cp
+        userPokes.sort(new SortByUserCPTDamage());
+        
+        if (userPokes.size() <= 24) {
+            return userPokes;
+        } else {
+            return userPokes.subList(0, 24);
+        }
     }
-  }
     
-    public static List<UserPokemon> createUserListSortedByMaxCPTDAndMoveDPE(List<UserPokemon> userPokes) {
+    public static List<UserPokemon> createUserListSortedByMaxCPTDAndMoveDPE(
+            List<UserPokemon> userPokes) {
         // sort by descending value
         userPokes.sort(new SortByUserCPTDamageTMoveDPE());
         
@@ -90,16 +91,16 @@ public class FetchBasedOnStats {
             if (!Collections.disjoint(
                     FetchBasedOnTypes.typesSuperEffective, Arrays.asList(poke.getType()))) {
                 pokesSuperEffective.add(poke);
-      }
+            }
+        }
     }
-  }
+    
+    static List<Pokedex> createListSortedByStats() {
+        final ArrayList<Pokedex> pokeList = pokesSuperEffective;
+        
+        // sort by descending max combined stats
+        pokeList.sort(new SortByCombinedStats());
 
-  static List<Pokedex> createListSortedByStats() {
-    final ArrayList<Pokedex> pokeList = pokesSuperEffective;
-
-    // sort by descending max combined stats
-    pokeList.sort(new SortByCombinedStats());
-  
     return pokeList.subList(0, 24);
   }
 
@@ -111,20 +112,20 @@ public class FetchBasedOnStats {
 
     // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
-  
-    return trimmedPokeList.subList(0, 24);
+    
+      return trimmedPokeList.subList(0, 24);
   }
-  
-  public static List<Pokedex> createListSortedByMaxCPTimesDamageEffectiveness() {
+    
+    public static List<Pokedex> createListSortedByMaxCPTimesDamageEffectiveness() {
     final ArrayList<Pokedex> pokeList = pokesSuperEffective;
-    
-    // sort by descending max cp
+        
+        // sort by descending max cp
     pokeList.sort(new SortByMaxCPDamageTotal());
-    
-    // remove duplicates
+        
+        // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
-  
-    return trimmedPokeList.subList(0, 24);
+        
+        return trimmedPokeList.subList(0, 24);
   }
 
   public static List<Pokedex> createListSortedByMaxCPTDAndMoveDPE() {
@@ -132,25 +133,25 @@ public class FetchBasedOnStats {
 
     // sort by descending max cp
     pokeList.sort(new SortByCPDTAndMoveDPE());
-  
-    // remove duplicates
+    
+      // remove duplicates
     ArrayList<Pokedex> trimmedPokeList = removeDuplicates(pokeList);
-  
-    return trimmedPokeList.subList(0, 24);
+    
+      return trimmedPokeList.subList(0, 24);
   }
-  
-  public static int combineStats(Pokedex poke) {
+    
+    public static int combineStats(Pokedex poke) {
     return (poke.getPokeAttack() + poke.getPokeDefense() + poke.getPokeStamina());
   }
-  
-  /////////////////////////////////////////////////////////////////////////////////////
+    
+    /////////////////////////////////////////////////////////////////////////////////////
   // misc below
-  
-  public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+    
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
     // Create a new ArrayList
     ArrayList<T> newList = new ArrayList<>();
-    
-    // Traverse through the first list
+        
+        // Traverse through the first list
     for (T element : list) {
       // If this element is not present in newList, add it
       if (!newList.contains(element)) {

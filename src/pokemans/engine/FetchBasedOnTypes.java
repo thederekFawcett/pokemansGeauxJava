@@ -75,8 +75,8 @@ public class FetchBasedOnTypes {
                   if ((againstThis.compareTo(one)) > 0) {
                       typesSuperEffective.add(type);
                       damageSuperEffective.add(againstThis);
-            } else if (againstThis.compareTo(one) == 0) {
-              typesNormalEffective.add(type);
+                  } else if (againstThis.compareTo(one) == 0) {
+                      typesNormalEffective.add(type);
                       damageNormalEffective.add(againstThis);
                   } else if (againstThis.compareTo(one) < 0) {
                       typesNotEffective.add(type);
@@ -100,41 +100,41 @@ public class FetchBasedOnTypes {
                   if ((againstThis.compareTo(one)) > 0) {
                       typesSuperEffective.add(type);
                       damageSuperEffective.add(againstThis);
-            } else if (againstThis.compareTo(one) == 0) {
-              typesNormalEffective.add(type);
-              damageNormalEffective.add(againstThis);
-            } else if (againstThis.compareTo(one) < 0) {
-              typesNotEffective.add(type);
-              damageNotEffective.add(againstThis);
-            }
-          } catch (IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-          }
+                  } else if (againstThis.compareTo(one) == 0) {
+                      typesNormalEffective.add(type);
+                      damageNormalEffective.add(againstThis);
+                  } else if (againstThis.compareTo(one) < 0) {
+                      typesNotEffective.add(type);
+                      damageNotEffective.add(againstThis);
+                  }
+              } catch (IllegalAccessException | InvocationTargetException e) {
+                  e.printStackTrace();
+              }
         }
       }
     }
-
-    // check if duplicates exists in super effective, AND not effective and do maths
-    if (typesSuperEffective.size() > typesNotEffective.size()) {
-      // bigger list first two, smaller list second two
-        calculateMathsForDuplicatesOpposites(
-                typesNotEffective, damageNotEffective, typesSuperEffective, damageSuperEffective);
-    } else {
-        calculateMathsForDuplicatesOpposites(
-                typesSuperEffective, damageSuperEffective, typesNotEffective, damageNotEffective);
-    }
+    
+      // check if duplicates exists in super effective, AND not effective and do maths
+      if (typesSuperEffective.size() > typesNotEffective.size()) {
+          // bigger list first two, smaller list second two
+          calculateMathsForDuplicatesOpposites(
+                  typesNotEffective, damageNotEffective, typesSuperEffective, damageSuperEffective);
+      } else {
+          calculateMathsForDuplicatesOpposites(
+                  typesSuperEffective, damageSuperEffective, typesNotEffective, damageNotEffective);
+      }
     
       // check if duplicates exists in super effective, OR not effective and do maths
-    calculateMathsForDuplicatesSameSide(typesNotEffective, damageNotEffective);
-    calculateMathsForDuplicatesSameSide(typesSuperEffective, damageSuperEffective);
+      calculateMathsForDuplicatesSameSide(typesNotEffective, damageNotEffective);
+      calculateMathsForDuplicatesSameSide(typesSuperEffective, damageSuperEffective);
     
       allEffectiveTypesPre.addAll(typesSuperEffective);
-    allEffectiveTypesPre.addAll(typesNormalEffective);
-    allEffectiveTypesPre.addAll(typesNotEffective);
+      allEffectiveTypesPre.addAll(typesNormalEffective);
+      allEffectiveTypesPre.addAll(typesNotEffective);
     
       allEffectiveDamagesPre.addAll(damageSuperEffective);
-    allEffectiveDamagesPre.addAll(damageNormalEffective);
-    allEffectiveDamagesPre.addAll(damageNotEffective);
+      allEffectiveDamagesPre.addAll(damageNormalEffective);
+      allEffectiveDamagesPre.addAll(damageNotEffective);
     
       findDuplicatesTypes(allEffectiveTypes, allEffectiveDamages);
   }
@@ -150,16 +150,16 @@ public class FetchBasedOnTypes {
                 
                 allEffectiveTypesFinal.add(allEffectiveTypes.get(i));
                 allEffectiveDamagesFinal.add(allEffectiveDamages.get(i));
-
-      } else {
+                
+            } else {
                 int place = allEffectiveTypesFinal.indexOf(allEffectiveTypes.get(i));
                 BigDecimal combinedDamage =
                         (allEffectiveDamagesFinal.get(place)).multiply(allEffectiveDamages.get(i));
                 
                 allEffectiveDamagesFinal.set(place, combinedDamage);
             }
+        }
     }
-  }
     
     public static void calculateMathsForDuplicatesOpposites(
             ArrayList<Type> smallerListType,
@@ -184,12 +184,12 @@ public class FetchBasedOnTypes {
                     biggerListDamage.remove(bigCount + 1);
                     biggerListType.remove(bigCount + 1);
                 }
-        smallerListDamage.remove(smallCount);
-        smallerListType.remove(smallCount);
-        smallCount--;
-      }
+                smallerListDamage.remove(smallCount);
+                smallerListType.remove(smallCount);
+                smallCount--;
+            }
+        }
     }
-  }
     
     public static void calculateMathsForDuplicatesSameSide(
             ArrayList<Type> listType, ArrayList<BigDecimal> listDamage) {
@@ -203,12 +203,12 @@ public class FetchBasedOnTypes {
                     smallCount--;
                 }
             }
+        }
     }
-  }
     
     public static String listToString(ArrayList<Type> type) {
-    return type.toString().replace("[", "").replace("]", "");
-  }
+        return type.toString().replace("[", "").replace("]", "");
+    }
     
     public static BigDecimal checkPokeWeaknesses(Pokedex poke) {
         BigDecimal effectiveness = null;
@@ -240,16 +240,16 @@ public class FetchBasedOnTypes {
                     break;
                 case "POKEMON_TYPE_DARK":
                     dark = damage;
-          break;
-        case "POKEMON_TYPE_DRAGON":
-          dragon = damage;
-          break;
-        case "POKEMON_TYPE_ELECTRIC":
-          electric = damage;
-          break;
-        case "POKEMON_TYPE_FAIRY":
-          fairy = damage;
-          break;
+                    break;
+                case "POKEMON_TYPE_DRAGON":
+                    dragon = damage;
+                    break;
+                case "POKEMON_TYPE_ELECTRIC":
+                    electric = damage;
+                    break;
+                case "POKEMON_TYPE_FAIRY":
+                    fairy = damage;
+                    break;
         case "POKEMON_TYPE_FIGHTING":
           fighting = damage;
           break;
@@ -283,19 +283,19 @@ public class FetchBasedOnTypes {
         case "POKEMON_TYPE_ROCK":
           rock = damage;
           break;
-        case "POKEMON_TYPE_STEEL":
-          steel = damage;
-          break;
-        case "POKEMON_TYPE_WATER":
-          water = damage;
-          break;
-        default:
-          break;
-      }
-    }
+                case "POKEMON_TYPE_STEEL":
+                    steel = damage;
+                    break;
+                case "POKEMON_TYPE_WATER":
+                    water = damage;
+                    break;
+                default:
+                    break;
+            }
+        }
         
         return effectiveness;
-  }
+    }
     
     static BigDecimal typeEffectivenessCalculator(Type type) {
         BigDecimal bug = new BigDecimal("1.0"),
@@ -326,16 +326,16 @@ public class FetchBasedOnTypes {
                 case "POKEMON_TYPE_BUG":
                     bug = damage;
                     break;
-        case "POKEMON_TYPE_DARK":
-          dark = damage;
-          break;
-        case "POKEMON_TYPE_DRAGON":
-          dragon = damage;
-          break;
-        case "POKEMON_TYPE_ELECTRIC":
-          electric = damage;
-          break;
-        case "POKEMON_TYPE_FAIRY":
+                case "POKEMON_TYPE_DARK":
+                    dark = damage;
+                    break;
+                case "POKEMON_TYPE_DRAGON":
+                    dragon = damage;
+                    break;
+                case "POKEMON_TYPE_ELECTRIC":
+                    electric = damage;
+                    break;
+                case "POKEMON_TYPE_FAIRY":
           fairy = damage;
           break;
         case "POKEMON_TYPE_FIGHTING":
@@ -423,18 +423,18 @@ public class FetchBasedOnTypes {
       case "POKEMON_TYPE_NORMAL":
         damageMultiplier = normal;
         break;
-      case "POKEMON_TYPE_POISON":
-        damageMultiplier = poison;
-        break;
-      case "POKEMON_TYPE_PSYCHIC":
-        damageMultiplier = psychic;
-        break;
-      case "POKEMON_TYPE_ROCK":
-        damageMultiplier = rock;
-        break;
-      case "POKEMON_TYPE_STEEL":
-          damageMultiplier = steel;
-          break;
+        case "POKEMON_TYPE_POISON":
+            damageMultiplier = poison;
+            break;
+        case "POKEMON_TYPE_PSYCHIC":
+            damageMultiplier = psychic;
+            break;
+        case "POKEMON_TYPE_ROCK":
+            damageMultiplier = rock;
+            break;
+        case "POKEMON_TYPE_STEEL":
+            damageMultiplier = steel;
+            break;
         case "POKEMON_TYPE_WATER":
             damageMultiplier = water;
             break;
@@ -460,7 +460,6 @@ public class FetchBasedOnTypes {
                 } else {
                     stab = new BigDecimal("1.0");
                 }
-                
             }
             if (stab.compareTo(returnValue) > 0) {
                 returnValue = stab;

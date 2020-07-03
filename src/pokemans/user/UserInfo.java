@@ -20,15 +20,15 @@ import java.util.List;
 public class UserInfo {
 
   public static void importUserCSV() {
-  
+
     List<UserPokemon> userPokes = new ArrayList<>();
     String existingUserCSVFileName = "src\\dataFiles\\history_20200626_111620full.csv";
-  
+
     // File tmpDir = new File(existingUserCSVFileName);
     // boolean fileExists = tmpDir.exists();
-  
+
     try (BufferedReader br = Files.newBufferedReader(Paths.get(existingUserCSVFileName))) {
-    
+
       String line = br.readLine();
       line = br.readLine();
       while (line != null) {
@@ -36,9 +36,9 @@ public class UserInfo {
         createPoke(attributes, userPokes);
         line = br.readLine();
       }
-    
+
       TypeInteractive.createLocalListOfUserPokesFromCSV(userPokes);
-    
+
     } catch (IOException e) {
       e.printStackTrace();
     }

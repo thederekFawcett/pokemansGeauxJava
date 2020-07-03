@@ -20,10 +20,10 @@ import java.util.List;
 public class Maths {
   private static final MathContext mc = new MathContext(14);
   static Pokedex dexPoke;
-  
+
   /////////////////////////////////////////////////////////////////////////////////////
   // functional maths below
-  
+
   // enter ACTUAL poke level, methods convert to CPM index level
   public static BigDecimal getActualAttack(UserPokemon poke, Pokedex dexPoke, BigDecimal level) {
     if (level == null) {
@@ -38,7 +38,7 @@ public class Maths {
               .round(mc);
     }
   }
-  
+
   public static BigDecimal getActualDefense(UserPokemon poke, Pokedex dexPoke, BigDecimal level) {
     if (level == null) {
       int userLevel = ((poke.getUserPokeLevel()).multiply(new BigDecimal("2"))).intValue() - 2;
@@ -52,7 +52,7 @@ public class Maths {
               .round(mc);
     }
   }
-  
+
   public static int getActualStamina(UserPokemon poke, Pokedex dexPoke, BigDecimal level) {
     if (level == null) {
       int userLevel = ((poke.getUserPokeLevel()).multiply(new BigDecimal("2"))).intValue() - 2;
@@ -71,11 +71,14 @@ public class Maths {
   
   public static int calculateDamageForOneFastMove(
           UserPokemon attackingPoke, Pokedex defendingPoke, MovesFast fastMove) {
-    BigDecimal halfTimesPower = (new BigDecimal("0.5")).multiply(new BigDecimal(fastMove.getPvpPower().toString()));
-    BigDecimal atkDIVDefense = (getActualAttack(attackingPoke, defendingPoke, null)
-            .divide(getActualDefense(attackingPoke, defendingPoke, new BigDecimal("40")), mc));
-    BigDecimal multipliers = FetchBasedOnTypes.stabCalculator(attackingPoke.getUserPokeType(), fastMove, null)
-            .multiply(CombatMultipliers.fastAttackBonusMultiplier);
+    BigDecimal halfTimesPower =
+            (new BigDecimal("0.5")).multiply(new BigDecimal(fastMove.getPvpPower().toString()));
+    BigDecimal atkDIVDefense =
+            (getActualAttack(attackingPoke, defendingPoke, null)
+                    .divide(getActualDefense(attackingPoke, defendingPoke, new BigDecimal("40")), mc));
+    BigDecimal multipliers =
+            FetchBasedOnTypes.stabCalculator(attackingPoke.getUserPokeType(), fastMove, null)
+                    .multiply(CombatMultipliers.fastAttackBonusMultiplier);
     return (((halfTimesPower.multiply(atkDIVDefense).multiply(multipliers))
             .setScale(0, RoundingMode.DOWN))
             .add(new BigDecimal("1.0")))
@@ -84,30 +87,33 @@ public class Maths {
   
   public static int calculateDamageForOneChargeMove(
           UserPokemon attackingPoke, Pokedex defendingPoke, MovesCinematic chargeMove) {
-    BigDecimal halfTimesPower = (new BigDecimal("0.5")).multiply(new BigDecimal(chargeMove.getPvpPower().toString()));
-    BigDecimal atkDIVDefense = (getActualAttack(attackingPoke, defendingPoke, null)
-            .divide(getActualDefense(attackingPoke, defendingPoke, new BigDecimal("40")), mc));
-    BigDecimal multipliers = FetchBasedOnTypes.stabCalculator(attackingPoke.getUserPokeType(), null, chargeMove)
-            .multiply(CombatMultipliers.chargeAttackBonusMultiplier);
+    BigDecimal halfTimesPower =
+            (new BigDecimal("0.5")).multiply(new BigDecimal(chargeMove.getPvpPower().toString()));
+    BigDecimal atkDIVDefense =
+            (getActualAttack(attackingPoke, defendingPoke, null)
+                    .divide(getActualDefense(attackingPoke, defendingPoke, new BigDecimal("40")), mc));
+    BigDecimal multipliers =
+            FetchBasedOnTypes.stabCalculator(attackingPoke.getUserPokeType(), null, chargeMove)
+                    .multiply(CombatMultipliers.chargeAttackBonusMultiplier);
     
     return (((halfTimesPower.multiply(atkDIVDefense).multiply(multipliers))
             .setScale(0, RoundingMode.DOWN))
             .add(new BigDecimal("1.0")))
             .intValue();
   }
-  
+
   /////////////////////////////////////////////////////////////////////////////////////
   // user poke maths below
-  
+
   public static BigDecimal calculateUserPokeCP(UserPokemon poke) {
-    
+
     BigDecimal attackBase = poke.getUserPokeAttackBase();
     BigDecimal defenseBase = poke.getUserPokeDefenseBase();
     BigDecimal staminaBase = poke.getUserPokeStaminaBase();
     BigDecimal attackIV = poke.getUserPokeAttackIV();
     BigDecimal defenseIV = poke.getUserPokeDefenseIV();
     BigDecimal staminaIV = poke.getUserPokeStaminaIV();
-    
+
     // @formatter:off
     BigDecimal cp =
             (((attackBase.add(attackIV))
@@ -173,16 +179,16 @@ public class Maths {
   public static Object[] calcHighestValueTimesStatProducts(UserPokemon poke) {
     Object[] chargeMoveValues = calculateUserPokeHighestMoveValue(poke),
             combinedValues = new Object[2];
-    
+  
     BigDecimal bestChargeMove = (BigDecimal) chargeMoveValues[0], bestFastMove;
     BigDecimal statProduct =
             getActualAttack(poke, dexPoke, null)
                     .multiply(getActualDefense(poke, dexPoke, null))
                     .multiply(new BigDecimal(String.valueOf(getActualStamina(poke, dexPoke, null))));
-    
+  
     combinedValues[0] = new BigDecimal("0.0");
     combinedValues[1] = chargeMoveValues[1];
-    
+  
     if (poke.getUserMoveFast() != null) {
       BigDecimal fastMoveDPTEPT = new BigDecimal(poke.getUserMoveFast().getPvpDPTEPT().toString());
       for (Type type : poke.getUserPokeType()) {
