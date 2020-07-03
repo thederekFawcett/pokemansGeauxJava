@@ -7,3 +7,8 @@
 /src/pokemans/utilities/write/
 /.idea/
 /.run/
+/.gradle/checksums/checksums.lock
+/.gradle/6.1.1/fileHashes/fileHashes.lock
+/.gradle/vcs-1/gc.properties
+/.gradle/6.1.1/gc.properties
+/.gradle/6.1.1/fileChanges/last-build.bin
